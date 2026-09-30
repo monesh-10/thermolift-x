@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OIL INDIA LIMITED // BAGHEWALA SCADA TWIN - CSS Allocation Planner</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & JetBrains Mono Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#246a4c",
+            "surface-container-highest": "#e5e2dd",
+            "primary-container": "#211a17",
+            "on-tertiary-container": "#bd721d",
+            "surface-container-low": "#f6f3ee",
+            "inverse-surface": "#31302d",
+            "on-primary-fixed": "#211a17",
+            "outline": "#7f7570",
+            "on-primary-fixed-variant": "#4d4541",
+            "on-secondary-container": "#296f50",
+            "surface-dim": "#dcdad5",
+            "surface-bright": "#fcf9f4",
+            "on-primary-container": "#8c827d",
+            "tertiary-container": "#2d1600",
+            "surface-container-lowest": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#6b3b00",
+            "on-surface": "#1c1c19",
+            "on-secondary": "#ffffff",
+            "surface": "#fcf9f4",
+            "tertiary-fixed-dim": "#ffb874",
+            "surface-variant": "#e5e2dd",
+            "on-secondary-fixed": "#002113",
+            "secondary-container": "#a8efc8",
+            "secondary-fixed-dim": "#8fd5b0",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#f0ede9",
+            "secondary-fixed": "#abf2cb",
+            "primary": "#000000",
+            "on-surface-variant": "#4e4541",
+            "surface-container-high": "#ebe8e3",
+            "primary-fixed-dim": "#d0c4bf",
+            "tertiary": "#000000",
+            "inverse-primary": "#d0c4bf",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#005235",
+            "outline-variant": "#d1c4be",
+            "on-tertiary-fixed": "#2d1600",
+            "background": "#fcf9f4",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "surface-tint": "#665d58",
+            "primary-fixed": "#ede0da",
+            "on-background": "#1c1c19",
+            "inverse-on-surface": "#f3f0eb",
+            "tertiary-fixed": "#ffdcbf",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "gutter": "0.75rem",
+            "space-md": "0.75rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1rem",
+            "space-xl": "1.5rem",
+            "margin": "1rem"
+          },
+          "fontFamily": {
+            "telemetry-sm": ["JetBrains Mono"],
+            "headline-xl": ["Inter"],
+            "telemetry-md": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "telemetry-display": ["JetBrains Mono"],
+            "telemetry-lg": ["JetBrains Mono"],
+            "headline-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "label-caps": ["JetBrains Mono"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "telemetry-sm": ["11px", { "lineHeight": "14px", "fontWeight": "400" }],
+            "headline-xl": ["32px", { "lineHeight": "38px", "fontWeight": "600" }],
+            "telemetry-md": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-sm": ["11px", { "lineHeight": "15px", "fontWeight": "400" }],
+            "telemetry-display": ["28px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "telemetry-lg": ["18px", { "lineHeight": "22px", "fontWeight": "500" }],
+            "headline-lg": ["24px", { "lineHeight": "30px", "fontWeight": "600" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-caps": ["10px", { "lineHeight": "12px", "fontWeight": "600" }],
+            "body-lg": ["15px", { "lineHeight": "22px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 16px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .shadow-scada-offset {
+      box-shadow: 2px 2px 0px rgba(27, 21, 18, 0.12);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f0ede9;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #d1c4be;
+      border-radius: 2px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #7f7570;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md select-none overflow-x-hidden min-h-screen flex flex-col">
+<!-- ==================== TOP NAVIGATION DOCKED BAR ==================== -->
+<header class="w-full bg-primary-container text-on-primary border-b border-outline-variant select-none z-50">
+<!-- Level 1: Brand & Global Rig Operational Telemetry Anchor -->
+<div class="h-11 px-6 flex items-center justify-between border-b border-[#332A24]">
+<!-- Left Brand & Formation Meta -->
+<div class="flex items-center space-x-3">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 bg-secondary-container inline-block"></span>
+<span class="font-telemetry-md text-telemetry-md tracking-wider uppercase text-surface font-semibold">OIL INDIA LIMITED // BAGHEWALA SCADA TWIN</span>
+</div>
+<span class="text-on-primary-container font-telemetry-sm text-telemetry-sm">|</span>
+<div class="flex items-center space-x-2 font-telemetry-sm text-telemetry-sm text-on-primary-container">
+<span>FIELD: <strong class="text-surface font-semibold">JODHPUR SANDSTONE</strong> (17.4° API)</span>
+<span>•</span>
+<span>ACTIVE: <strong class="text-secondary-container font-semibold">BGW-002</strong></span>
+</div>
+</div>
+<!-- Right SCADA Diagnostics & Status Tokens -->
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-2 font-telemetry-sm text-telemetry-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="text-surface font-telemetry-sm text-telemetry-sm">SYNC 2.4s</span>
+<span class="text-on-primary-container">|</span>
+<span class="text-surface font-semibold">15/15 ONLINE</span>
+</div>
+<div class="px-2 py-0.5 bg-[#2A221E] border border-[#3E342E] flex items-center space-x-1.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span class="font-label-caps text-label-caps text-secondary-container uppercase">CLOSED-LOOP GOVERNOR: ACTIVE</span>
+</div>
+<button class="flex items-center space-x-1 px-2 py-1 bg-[#2C231F] hover:bg-inverse-surface border border-outline-variant text-surface font-telemetry-sm text-telemetry-sm rounded transition-colors duration-150">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-caps text-label-caps uppercase">HOW OUR AI &amp; PHYSICS TWIN WORKS</span>
+</button>
+<button class="flex items-center space-x-1 px-2 py-1 bg-[#2C231F] hover:bg-inverse-surface border border-outline-variant text-surface font-telemetry-sm text-telemetry-sm rounded transition-colors duration-150">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-label-caps text-label-caps uppercase">AUDIT LOG</span>
+</button>
+</div>
+</div>
+<!-- Level 2: Sub-Navigation Architecture (Tab 2 Active) -->
+<div class="h-11 px-6 flex items-center justify-between bg-primary-container">
+<nav class="flex items-center space-x-6 h-full font-telemetry-sm text-telemetry-sm">
+<a class="text-on-primary-container hover:text-surface h-full flex items-center px-1 border-b-2 border-transparent transition-colors" href="#">
+          Live Twin &amp; Simulator
+        </a>
+<a class="border-b-2 border-secondary-container text-surface font-semibold h-full flex items-center px-1" href="#">
+          CSS Allocation Planner
+        </a>
+<a class="text-on-primary-container hover:text-surface h-full flex items-center px-1 border-b-2 border-transparent transition-colors" href="#">
+          Incident Replay &amp; Faults
+        </a>
+<a class="text-on-primary-container hover:text-surface h-full flex items-center px-1 border-b-2 border-transparent transition-colors" href="#">
+          Well Audit Log
+        </a>
+</nav>
+<div class="flex items-center space-x-3">
+<div class="flex items-center space-x-1.5 font-telemetry-sm text-telemetry-sm text-on-primary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>MODBUS TCP/IP (RTU-BGW-77)</span>
+</div>
+<div class="h-3 w-px bg-[#3E342E]"></div>
+<button class="px-2.5 py-1 bg-[#8D2222] hover:bg-[#a02626] border border-[#B93838] text-surface font-telemetry-sm text-telemetry-sm font-semibold rounded flex items-center space-x-1 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-xs" data-icon="emergency">emergency</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">ESD FIELD SHUT-IN</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN WORKSTATION SHELL (SIDEBAR + MAIN CANVAS) ==================== -->
+<div class="flex-1 flex overflow-hidden">
+<!-- LEFT SIDEBAR: FLEET SELECTOR (15 ACTIVE WELLHEADS) -->
+<aside class="w-80 flex-shrink-0 bg-surface-container-low border-r border-outline-variant flex flex-col justify-between select-none">
+<!-- Top Fleet Header & Filters -->
+<div class="p-5 border-b border-outline-variant bg-surface-container">
+<div class="flex items-center justify-between mb-3">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">FLEET SELECTOR</div>
+<div class="font-headline-md text-headline-md text-on-surface">15 ACTIVE WELLHEADS</div>
+</div>
+<span class="px-2 py-0.5 bg-surface-container-highest border border-outline-variant font-telemetry-sm text-telemetry-sm text-on-surface">RIG-04</span>
+</div>
+<!-- Filter Pills Matrix -->
+<div class="grid grid-cols-5 gap-1.5 font-label-caps text-label-caps text-center">
+<button class="py-1.5 bg-primary text-on-primary font-semibold rounded-none">ALL (15)</button>
+<button class="py-1.5 bg-surface-container-highest text-on-surface-variant hover:bg-surface-dim transition-colors">INJ (3)</button>
+<button class="py-1.5 bg-surface-container-highest text-on-surface-variant hover:bg-surface-dim transition-colors">SOAK (2)</button>
+<button class="py-1.5 bg-surface-container-highest text-on-surface-variant hover:bg-surface-dim transition-colors">PROD (8)</button>
+<button class="py-1.5 bg-error-container text-on-error-container font-semibold border border-error">FLT (2)</button>
+</div>
+</div>
+<!-- Scrollable Wellheads Telemetry Feed -->
+<div class="flex-1 overflow-y-auto custom-scroll p-3 space-y-2.5">
+<!-- BGW-002: ACTIVE WELL -->
+<div class="p-3 bg-surface-container-lowest border-2 border-primary shadow-scada-offset relative cursor-pointer">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 bg-[#B93838]"></span>
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface">BGW-002</span>
+<span class="font-label-caps text-label-caps px-1 bg-surface-container-highest text-on-surface">PROD (C4)</span>
+</div>
+<span class="font-label-caps text-label-caps px-1.5 py-0.5 bg-error-container text-on-error-container border border-error font-semibold">
+              84% ROD FLOAT
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-1 font-telemetry-sm text-telemetry-sm text-on-surface-variant border-t border-outline-variant pt-1.5 mt-1.5">
+<div>
+<span class="font-label-caps text-label-caps block text-outline">VISC</span>
+<span class="text-error font-semibold font-telemetry-sm text-telemetry-sm">4,820 cP</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps block text-outline">NET FLOW</span>
+<span class="text-on-surface font-telemetry-sm text-telemetry-sm">18.4 m³/d</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps block text-outline">SOR</span>
+<span class="text-on-surface font-semibold font-telemetry-sm text-telemetry-sm">3.12</span>
+</div>
+</div>
+<div class="mt-2 flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+<span>DAY 42 PROD • 6D TO CUT-OFF</span>
+<span class="text-secondary font-bold">RE-INJ PRIORITY 1</span>
+</div>
+</div>
+<!-- BGW-004: STEAM INJECTION ACTIVE -->
+<div class="p-3 bg-surface-container-lowest border border-outline-variant hover:border-on-surface transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 bg-secondary animate-pulse"></span>
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface">BGW-004</span>
+<span class="font-label-caps text-label-caps px-1.5 bg-secondary-container text-on-secondary-container font-semibold">INJECTION</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm font-semibold text-secondary">140.0 t/d</span>
+</div>
+<div class="grid grid-cols-3 gap-1 font-telemetry-sm text-telemetry-sm text-on-surface-variant border-t border-outline-variant pt-1.5 mt-1.5">
+<div>
+<span class="font-label-caps text-label-caps block text-outline">VISC</span>
+<span class="text-on-surface">820 cP</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps block text-outline">INJ P</span>
+<span class="text-on-surface">16.4 MPa</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps block text-outline">SOR</span>
+<span class="text-on-surface">2.40</span>
+</div>
+</div>
+<div class="mt-2 font-label-caps text-label-caps text-on-surface-variant">DAY 6/14 • 8 DAYS REMAINING</div>
+</div>
+<!-- BGW-001: NOMINAL PROD -->
+<div class="p-3 bg-surface-container-lowest border border-outline-variant hover:border-on-surface transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 bg-secondary"></span>
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface">BGW-001</span>
+<span class="font-label-caps text-label-caps px-1 bg-surface-container-highest text-on-surface">PROD</span>
+</div>
+<span class="font-label-caps text-label-caps px-1.5 bg-[#EAF2ED] text-secondary border border-secondary">NOMINAL</span>
+</div>
+<div class="grid grid-cols-3 gap-1 font-telemetry-sm text-telemetry-sm text-on-surface-variant border-t border-outline-variant pt-1.5 mt-1.5">
+<div><span class="font-label-caps text-label-caps block text-outline">VISC</span>1,420 cP</div>
+<div><span class="font-label-caps text-label-caps block text-outline">NET FLOW</span>24.2 m³/d</div>
+<div><span class="font-label-caps text-label-caps block text-outline">SOR</span>2.75</div>
+</div>
+</div>
+<!-- BGW-003: SOAK PHASE -->
+<div class="p-3 bg-surface-container-lowest border border-outline-variant hover:border-on-surface transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 bg-[#B86E18]"></span>
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface">BGW-003</span>
+<span class="font-label-caps text-label-caps px-1.5 bg-tertiary-fixed text-on-tertiary-fixed font-semibold">SOAKING</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-tertiary-container">DAY 4/7 SOAK</span>
+</div>
+<div class="grid grid-cols-3 gap-1 font-telemetry-sm text-telemetry-sm text-on-surface-variant border-t border-outline-variant pt-1.5 mt-1.5">
+<div><span class="font-label-caps text-label-caps block text-outline">TEMP</span>182°C</div>
+<div><span class="font-label-caps text-label-caps block text-outline">P-RES</span>11.8 MPa</div>
+<div><span class="font-label-caps text-label-caps block text-outline">SOR</span>2.10</div>
+</div>
+</div>
+<!-- BGW-005: CRITICAL LATE PROD -->
+<div class="p-3 bg-surface-container-lowest border border-error hover:border-on-surface transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 bg-error"></span>
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface">BGW-005</span>
+<span class="font-label-caps text-label-caps px-1 bg-surface-container-highest text-on-surface">PROD (D58)</span>
+</div>
+<span class="font-label-caps text-label-caps px-1.5 py-0.5 bg-error-container text-on-error-container border border-error">91% FLOAT</span>
+</div>
+<div class="grid grid-cols-3 gap-1 font-telemetry-sm text-telemetry-sm text-on-surface-variant border-t border-outline-variant pt-1.5 mt-1.5">
+<div><span class="font-label-caps text-label-caps block text-outline">VISC</span><strong class="text-error font-telemetry-sm text-telemetry-sm">8,900 cP</strong></div>
+<div><span class="font-label-caps text-label-caps block text-outline">NET FLOW</span>6.1 m³/d</div>
+<div><span class="font-label-caps text-label-caps block text-outline">SOR</span><strong class="text-error font-telemetry-sm text-telemetry-sm">4.85</strong></div>
+</div>
+</div>
+<!-- BGW-006: NOMINAL PROD -->
+<div class="p-3 bg-surface-container-lowest border border-outline-variant hover:border-on-surface transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 bg-secondary"></span>
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface">BGW-006</span>
+<span class="font-label-caps text-label-caps px-1 bg-surface-container-highest text-on-surface">PROD</span>
+</div>
+<span class="font-label-caps text-label-caps px-1.5 bg-[#EAF2ED] text-secondary border border-secondary">NOMINAL</span>
+</div>
+<div class="grid grid-cols-3 gap-1 font-telemetry-sm text-telemetry-sm text-on-surface-variant border-t border-outline-variant pt-1.5 mt-1.5">
+<div><span class="font-label-caps text-label-caps block text-outline">VISC</span>2,100 cP</div>
+<div><span class="font-label-caps text-label-caps block text-outline">NET FLOW</span>19.8 m³/d</div>
+<div><span class="font-label-caps text-label-caps block text-outline">SOR</span>2.90</div>
+</div>
+</div>
+</div>
+<!-- Footer Rig Hardware Heartbeat -->
+<div class="p-4 border-t border-outline-variant bg-surface-container font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<div class="flex items-center justify-between">
+<span>BAGHEWALA RIG OPS #4</span>
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-secondary"></span>
+</div>
+<div class="font-label-caps text-label-caps text-outline mt-1">MODBUS RTU: 192.168.12.8:502</div>
+</div>
+</aside>
+<!-- MAIN SCADA WORKSTATION VIEWPORT: VERTICALLY STACKED & SPACIOUS -->
+<main class="flex-1 overflow-y-auto custom-scroll bg-surface p-8 space-y-8">
+<!-- 1. STACKED FIELD BOILER & WELLHEAD METRICS (VERTICAL ONE-BY-ONE ARCHITECTURE) -->
+<div class="space-y-6">
+<!-- FIELD BOILER CAPACITY & FLEET INSTANTANEOUS SOR CARD -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 shadow-scada-offset">
+<div class="grid grid-cols-12 gap-8 items-center">
+<!-- Field Boiler Capacity Matrix -->
+<div class="col-span-12 lg:col-span-7 pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-outline-variant pb-6 lg:pb-0">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center space-x-2">
+<span class="w-3 h-3 bg-secondary inline-block"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider font-semibold">FIELD BOILER CAPACITY (450.0 T/D POOL)</span>
+</div>
+<span class="font-label-caps text-label-caps px-2.5 py-1 bg-[#EAF2ED] text-secondary border border-secondary font-semibold">BOILERS B-01, B-02, B-03 ONLINE</span>
+</div>
+<div class="flex items-baseline space-x-3 my-2">
+<span class="font-telemetry-display text-4xl font-bold text-on-surface tracking-tight">385.0</span>
+<span class="font-telemetry-md text-telemetry-md text-outline">/ 450.0 Tons/Day</span>
+<span class="ml-auto font-telemetry-md text-telemetry-md text-secondary font-bold">85.5% TOTAL LOAD</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-3 bg-surface-container-high rounded-none my-3 overflow-hidden flex border border-outline-variant">
+<div class="h-full bg-primary" style="width: 85.5%;"></div>
+<div class="h-full bg-secondary-container" style="width: 14.5%;"></div>
+</div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant pt-1">
+<span>EFFICIENCY: 88.0% THERMAL</span>
+<span>16.5 MPa • 310°C SATURATED</span>
+<span class="text-secondary font-bold">RESERVE: 65.0 t/d</span>
+</div>
+</div>
+<!-- Fleet Allocation Balance Metric -->
+<div class="col-span-12 lg:col-span-5 pl-0 lg:pl-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider block mb-2 font-semibold">FLEET INSTANTANEOUS SOR AVERAGE</span>
+<div class="flex items-baseline space-x-3 mb-2">
+<span class="font-telemetry-display text-4xl font-bold text-on-surface">3.18</span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline">bbl steam / bbl oil</span>
+</div>
+<div class="flex items-center space-x-3 font-telemetry-sm text-telemetry-sm pt-1">
+<span class="text-secondary font-semibold">▼ -0.24 vs Last Cycle</span>
+<span class="text-outline">|</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">ECONOMIC LIMIT: 4.20 SOR</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SELECTED TARGET WELLHEAD CARD (BGW-002) - FULL WIDTH & SPACIOUS -->
+<section class="bg-surface-container-lowest border-2 border-primary p-6 shadow-scada-offset">
+<div class="flex flex-wrap items-center justify-between mb-4 pb-3 border-b border-outline-variant gap-3">
+<div class="flex items-center space-x-3">
+<span class="w-3.5 h-3.5 bg-[#B93838]"></span>
+<span class="font-headline-md text-xl font-bold text-on-surface">BGW-002 TARGET ASSIGNMENT</span>
+<span class="px-2 py-0.5 bg-primary text-on-primary font-label-caps text-label-caps">ACTIVE TARGET</span>
+</div>
+<span class="px-3 py-1 bg-error-container text-on-error-container border border-error font-label-caps text-label-caps font-bold">
+        ECONOMIC CUT-OFF IN 6 DAYS
+      </span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-telemetry-sm text-telemetry-sm bg-surface-container-low p-4 border border-outline-variant">
+<div class="p-2">
+<span class="font-label-caps text-label-caps block text-outline mb-1">CURRENT OPERATIONAL STATE</span>
+<span class="font-bold text-base text-on-surface">Cycle 4 • Day 42</span>
+</div>
+<div class="p-2">
+<span class="font-label-caps text-label-caps block text-outline mb-1">CUMULATIVE OIL RECOVERY</span>
+<span class="font-bold text-base text-on-surface">2,140 bbl</span>
+</div>
+<div class="p-2">
+<span class="font-label-caps text-label-caps block text-outline mb-1">CURRENT WELLHEAD SOR</span>
+<span class="font-bold text-base text-on-surface">3.12</span>
+</div>
+<div class="p-2">
+<span class="font-label-caps text-label-caps block text-outline mb-1">RECOMMENDED STEAM QUOTA</span>
+<span class="font-bold text-base text-secondary">120.0 t/d</span>
+</div>
+</div>
+</section>
+</div>
+<!-- 2. STACKED FULL-WIDTH ENGINEERING CHARTS (VERTICAL ONE-BY-ONE WITH GENEROUS SIZING) -->
+<div class="space-y-8">
+<!-- CHART CARD 1: CUMULATIVE & INSTANTANEOUS SOR ECONOMIC INFLECTION CURVE -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 shadow-scada-offset">
+<div class="border-b border-outline-variant pb-4 mb-4">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider block mb-1">PHYSICS TWIN // ECONOMIC PERFORMANCE</span>
+<h3 class="font-headline-md text-xl text-on-surface font-semibold">Cumulative &amp; Instantaneous SOR Economic Inflection Curve</h3>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm px-3 py-1.5 bg-surface-container-high border border-outline-variant text-on-surface font-semibold">
+          BGW-002 • CYCLE 4
+        </span>
+</div>
+<!-- Inflection Point Alert Badge -->
+<div class="mt-3 p-2.5 bg-[#F9F2E7] border border-[#B86E18] flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center space-x-2 text-[#B86E18] font-label-caps text-label-caps font-bold">
+<span class="material-symbols-outlined text-base" data-icon="thermostat">thermostat</span>
+<span>ECONOMIC STEAM RE-INJECTION CUT-OFF: DAY 48 (Current: Day 42 — 6 Days Remaining)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-[#B86E18] font-semibold">Breakeven: $52/bbl</span>
+</div>
+</div>
+<!-- Full-Width High-Resolution SVG Chart -->
+<div class="w-full h-80 relative bg-[#FAF7F2] border border-outline-variant p-4">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 960 280">
+<defs>
+<pattern height="28" id="grid-sor-spacious" patternunits="userSpaceOnUse" width="60">
+<path d="M 60 0 L 0 0 0 28" fill="none" stroke="#E8E2D8" stroke-width="0.75"></path>
+</pattern>
+<lineargradient id="sor-area-wide" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#246a4c" stop-opacity="0.16"></stop>
+<stop offset="100%" stop-color="#246a4c" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#grid-sor-spacious)" height="100%" width="100%"></rect>
+<!-- Y-Axis Ticks (SOR 1.0 to 5.0) -->
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="28">SOR 5.0</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-error font-semibold" font-size="10" x="12" y="80">SOR 4.2 (LIMIT)</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="135">SOR 3.0</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="195">SOR 2.0</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="250">SOR 1.0</text>
+<!-- Economic Cut-off threshold line at SOR = 4.2 -->
+<line stroke="#B93838" stroke-dasharray="6,4" stroke-width="1.75" x1="70" x2="940" y1="80" y2="80"></line>
+<rect fill="#F9EBEB" height="18" stroke="#B93838" stroke-width="0.75" width="180" x="720" y="65"></rect>
+<text class="font-label-caps text-label-caps fill-error" font-size="10" font-weight="700" x="728" y="78">ECONOMIC CUT-OFF: SOR 4.2</text>
+<!-- Cumulative Oil Curve -->
+<path d="M 70 240 Q 250 215, 450 150 T 750 75 T 940 45" fill="none" stroke="#7f7570" stroke-width="2"></path>
+<!-- Instantaneous SOR Curve -->
+<path d="M 70 242 C 220 230, 360 215, 510 175 C 580 150, 650 125, 715 80 C 765 40, 850 20, 940 14" fill="none" stroke="#1B1512" stroke-width="3"></path>
+<!-- Shaded Cumulative Profit Window -->
+<path d="M 70 242 C 220 230, 360 215, 510 175 C 580 150, 650 125, 715 80 L 715 255 L 70 255 Z" fill="url(#sor-area-wide)"></path>
+<!-- Day 42 Operational Position (Current Day) -->
+<line stroke="#1B1512" stroke-dasharray="3,3" stroke-width="2" x1="625" x2="625" y1="20" y2="255"></line>
+<circle cx="625" cy="132" fill="#B93838" r="6" stroke="#FFFFFF" stroke-width="2.5"></circle>
+<rect fill="#1B1512" height="20" width="105" x="525" y="112"></rect>
+<text class="font-telemetry-sm text-telemetry-sm" fill="#FFFFFF" font-size="10" font-weight="700" x="532" y="126">DAY 42 (3.12)</text>
+<!-- Day 48 Cutoff Point Marker -->
+<circle cx="715" cy="80" fill="#B86E18" r="6.5" stroke="#FFFFFF" stroke-width="2.5"></circle>
+<text class="font-label-caps text-label-caps fill-on-surface" font-size="10" font-weight="700" x="725" y="100">DAY 48 CUT-OFF</text>
+<!-- X-Axis Labels -->
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="70" y="270">Day 0</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="240" y="270">Day 15</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="430" y="270">Day 30</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-on-surface font-bold" font-size="10" x="612" y="270">Day 42</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-error font-bold" font-size="10" x="705" y="270">Day 48</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="815" y="270">Day 60</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="915" y="270">Day 90</text>
+</svg>
+</div>
+<!-- Technical Legend Matrix -->
+<div class="mt-4 pt-3 border-t border-outline-variant flex flex-wrap items-center justify-between gap-4 font-label-caps text-label-caps">
+<div class="flex items-center space-x-2">
+<span class="w-4 h-1 bg-[#1B1512]"></span>
+<span class="text-on-surface">INSTANTANEOUS SOR</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-4 h-1 bg-outline"></span>
+<span class="text-on-surface">CUMULATIVE OIL (BBL)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-4 h-0.5 border-b-2 border-dashed border-error"></span>
+<span class="text-error font-semibold">ECONOMIC LIMIT (4.2 SOR)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-3 h-3 bg-secondary-container"></span>
+<span class="text-secondary font-semibold">NET RECOVERY WINDOW</span>
+</div>
+</div>
+</section>
+<!-- CHART CARD 2: SUBSURFACE RESERVOIR HEAT DECAY & VISCOSITY REBOUND MODEL -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 shadow-scada-offset">
+<div class="border-b border-outline-variant pb-4 mb-4">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider block mb-1">THERMAL RESERVOIR SIMULATION // TRANSIENT REBOUND</span>
+<h3 class="font-headline-md text-xl text-on-surface font-semibold">Reservoir Heat Decay &amp; Viscosity Rebound Model</h3>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm px-3 py-1.5 bg-surface-container-high border border-outline-variant text-on-surface font-semibold">
+          0 TO 180 DAYS OBSERVATION
+        </span>
+</div>
+<!-- Operating Marker Subtext -->
+<div class="mt-3 p-2.5 bg-error-container border border-error flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center space-x-2 text-on-error-container font-label-caps text-label-caps font-bold">
+<span class="material-symbols-outlined text-base" data-icon="speed">speed</span>
+<span>OPERATING POINT: DAY 42 @ 68.4°C / 4,820 cP (CRITICAL ROD FLOAT ZONE: &gt;4,000 cP)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-error font-bold">LIFT RISK 84% CRITICAL</span>
+</div>
+</div>
+<!-- Full-Width High-Resolution Heat Decay SVG Chart -->
+<div class="w-full h-80 relative bg-[#FAF7F2] border border-outline-variant p-4">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 960 280">
+<defs>
+<pattern height="28" id="grid-heat-spacious" patternunits="userSpaceOnUse" width="60">
+<path d="M 60 0 L 0 0 0 28" fill="none" stroke="#E8E2D8" stroke-width="0.75"></path>
+</pattern>
+<lineargradient id="float-hazard-wide" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ba1a1a" stop-opacity="0.14"></stop>
+<stop offset="100%" stop-color="#ba1a1a" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#grid-heat-spacious)" height="100%" width="100%"></rect>
+<!-- Left Y-Axis: Temp (°C) 260 -> 40 -->
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="28">260°C</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="105">180°C</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="180">100°C</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="12" y="250">47.2°C</text>
+<!-- Right Y-Axis: Viscosity (cP) -->
+<text class="font-telemetry-sm text-telemetry-sm fill-[#B93838]" font-size="10" x="880" y="28">12.5k cP</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-[#B93838] font-bold" font-size="10" x="880" y="115">4,000 cP</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-[#B93838]" font-size="10" x="880" y="190">1,000 cP</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="880" y="250">180 cP</text>
+<!-- Critical Rod Floating Threshold Line at 4,000 cP -->
+<line stroke="#B93838" stroke-dasharray="6,4" stroke-width="1.75" x1="70" x2="870" y1="115" y2="115"></line>
+<rect fill="url(#float-hazard-wide)" height="105" width="800" x="70" y="10"></rect>
+<text class="font-label-caps text-label-caps fill-error" font-size="10" font-weight="700" x="80" y="105">CRITICAL ROD FLOAT ZONE (&gt;4,000 cP)</text>
+<!-- Near-Wellbore Temperature Decay Curve -->
+<path d="M 70 30 C 180 100, 300 175, 450 205 C 600 230, 750 240, 870 246" fill="none" stroke="#B86E18" stroke-width="2.5"></path>
+<!-- In-Situ Viscosity Rebound Curve -->
+<path d="M 70 246 C 220 244, 380 235, 460 195 C 540 160, 600 110, 700 55 C 770 30, 820 24, 870 20" fill="none" stroke="#1B1512" stroke-width="3"></path>
+<!-- Day 42 Operating Point Marker -->
+<line stroke="#1B1512" stroke-dasharray="3,3" stroke-width="2" x1="550" x2="550" y1="15" y2="255"></line>
+<!-- Intersection with Temp (~68.4°C) -->
+<circle cx="550" cy="216" fill="#B86E18" r="5" stroke="#FFFFFF" stroke-width="2"></circle>
+<text class="font-telemetry-sm text-telemetry-sm fill-[#B86E18] font-bold" font-size="10" x="485" y="232">68.4°C</text>
+<!-- Intersection with Viscosity (4,820 cP) -->
+<circle cx="550" cy="100" fill="#B93838" r="6" stroke="#FFFFFF" stroke-width="2.5"></circle>
+<rect fill="#B93838" height="20" width="135" x="565" y="88"></rect>
+<text class="font-telemetry-sm text-telemetry-sm" fill="#FFFFFF" font-size="10" font-weight="700" x="572" y="102">4,820 cP (DAY 42)</text>
+<!-- X-Axis Labels -->
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="70" y="270">Day 0 (Inj End)</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="220" y="270">Day 14 (Soak)</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="390" y="270">Day 30</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-error font-bold" font-size="10" x="535" y="270">Day 42</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="690" y="270">Day 90</text>
+<text class="font-telemetry-sm text-telemetry-sm fill-outline" font-size="10" x="830" y="270">Day 180</text>
+</svg>
+</div>
+<!-- Legend Matrix -->
+<div class="mt-4 pt-3 border-t border-outline-variant flex flex-wrap items-center justify-between gap-4 font-label-caps text-label-caps">
+<div class="flex items-center space-x-2">
+<span class="w-4 h-1 bg-[#B86E18]"></span>
+<span class="text-on-surface">FORMATION TEMP (°C)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-4 h-1 bg-[#1B1512]"></span>
+<span class="text-on-surface">CRUDE VISCOSITY (cP)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-4 h-0.5 border-b-2 border-dashed border-error"></span>
+<span class="text-error font-semibold">ROD FLOAT DANGER (&gt;4,000 cP)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#B93838]"></span>
+<span class="text-on-surface">CURRENT STATUS (DAY 42)</span>
+</div>
+</div>
+</section>
+</div>
+<!-- 3. MIDDLE SECTION - FIELD-WIDE MULTI-WELL STEAM BOILER ALLOCATION ENGINE -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 shadow-scada-offset">
+<!-- Section Header with Operational Triggers -->
+<div class="flex flex-wrap items-center justify-between pb-4 border-b border-outline-variant mb-4 gap-3">
+<div>
+<div class="flex items-center space-x-2.5">
+<span class="w-3 h-3 bg-primary"></span>
+<h2 class="font-headline-md text-xl font-semibold text-on-surface">
+                FIELD BOILER ALLOCATION &amp; INCREMENTAL RECOVERY OPTIMIZATION MATRIX (450 T/D POOL)
+              </h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              Automated Pareto heuristic optimization ranking candidate wells by marginal incremental oil recovery per metric ton of steam injected.
+            </p>
+</div>
+<!-- Optimization Action Triggers -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3 py-2 bg-surface-container hover:bg-surface-container-highest border border-outline-variant text-on-surface font-telemetry-sm text-telemetry-sm font-semibold rounded flex items-center space-x-1.5 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="reorder">reorder</span>
+<span>RUN PARETO HEURISTIC OPTIMIZER</span>
+</button>
+<button class="px-3 py-2 bg-surface-container hover:bg-surface-container-highest border border-outline-variant text-on-surface font-telemetry-sm text-telemetry-sm font-semibold rounded flex items-center space-x-1.5 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="monitoring">monitoring</span>
+<span>SIMULATE 30-DAY INJECTION FORECAST</span>
+</button>
+<button class="px-3 py-2 bg-surface-container hover:bg-surface-container-highest border border-outline-variant text-on-surface font-telemetry-sm text-telemetry-sm font-semibold rounded flex items-center space-x-1.5 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+<span>EXPORT ALLOCATION MANIFEST</span>
+</button>
+</div>
+</div>
+<!-- High-Density Industrial SCADA Table -->
+<div class="overflow-x-auto custom-scroll border border-outline-variant">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+<th class="py-3 px-4 border-r border-outline-variant">WELLHEAD ID</th>
+<th class="py-3 px-4 border-r border-outline-variant">CURRENT PHASE &amp; DAY</th>
+<th class="py-3 px-4 border-r border-outline-variant text-right">VISCOSITY</th>
+<th class="py-3 px-4 border-r border-outline-variant text-right">CUMULATIVE SOR</th>
+<th class="py-3 px-4 border-r border-outline-variant text-right bg-surface-container-high">PROPOSED QUOTA</th>
+<th class="py-3 px-4 border-r border-outline-variant text-center">INJ DURATION</th>
+<th class="py-3 px-4 border-r border-outline-variant text-right">PROJ. NET GAIN</th>
+<th class="py-3 px-4 border-r border-outline-variant text-right font-bold text-on-surface">MARGINAL RECOVERY</th>
+<th class="py-3 px-4 border-r border-outline-variant text-center">LIFT PROTECTION RISK</th>
+<th class="py-3 px-4 text-center">ALLOCATION DISPATCH STATUS</th>
+</tr>
+</thead>
+<tbody class="font-telemetry-sm text-telemetry-sm divide-y divide-outline-variant">
+<!-- ROW 1: BGW-004 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 border-r border-outline-variant font-bold text-on-surface flex items-center space-x-2">
+<span class="w-2.5 h-2.5 bg-secondary rounded-none"></span>
+<span>BGW-004</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container font-semibold">Inj Day 6/14</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-medium">820 cP</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right">2.40</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-on-surface bg-surface-container-low">140.0 t/d</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center text-outline">8 Days Left</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-secondary font-semibold">+92 BOPD</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-on-surface">0.66 bbl/t</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center">
+<span class="px-2 py-0.5 bg-[#EAF2ED] text-secondary font-label-caps text-label-caps font-semibold">NOMINAL</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 bg-secondary text-on-secondary font-label-caps text-label-caps font-semibold rounded">
+                    ACTIVE ALLOCATION
+                  </span>
+</td>
+</tr>
+<!-- ROW 2: BGW-002 -->
+<tr class="bg-[#FFF9F6] border-2 border-primary hover:bg-[#FFF4ED] transition-colors">
+<td class="py-3.5 px-4 border-r border-outline-variant font-bold text-on-surface flex items-center space-x-2">
+<span class="w-2.5 h-2.5 bg-error"></span>
+<span class="font-telemetry-md text-telemetry-md font-bold">BGW-002</span>
+<span class="font-label-caps text-label-caps bg-primary text-on-primary px-1.5 py-0.5">ACTIVE TARGET</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant font-medium">
+                  Prod Day 42 <span class="text-error font-bold font-telemetry-sm text-telemetry-sm">(Cut-off in 6d)</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-error">4,820 cP</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-on-surface">3.12</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-secondary bg-[#EAF2ED]">120.0 t/d</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center font-semibold text-on-surface">12 Days Recommended</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-secondary font-bold">+115 BOPD</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-secondary">0.96 bbl/t ★</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center">
+<span class="px-2 py-0.5 bg-error-container text-on-error-container border border-error font-label-caps text-label-caps font-bold">
+                    84% ROD FLOAT CRITICAL
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<button class="px-3 py-1.5 bg-primary text-on-primary hover:bg-inverse-surface font-label-caps text-label-caps font-bold uppercase rounded shadow-sm flex items-center justify-center space-x-1.5 mx-auto">
+<span class="material-symbols-outlined text-sm" data-icon="water_heater">water_heater</span>
+<span>QUEUE CYCLE 5 INJECTION (P1)</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3: BGW-005 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 border-r border-outline-variant font-bold text-on-surface flex items-center space-x-2">
+<span class="w-2.5 h-2.5 bg-error"></span>
+<span>BGW-005</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant">
+                  Late Prod Day 58 <span class="text-error font-bold font-telemetry-sm text-telemetry-sm">(Exceeded Limit)</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-error">8,900 cP</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-error">4.85</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-on-surface bg-surface-container-low">110.0 t/d</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center text-outline">10 Days</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-secondary font-semibold">+78 BOPD</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-on-surface">0.71 bbl/t</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center">
+<span class="px-2 py-0.5 bg-error-container text-on-error-container border border-error font-label-caps text-label-caps font-bold">
+                    91% HIGH RISK
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<button class="px-3 py-1 bg-surface-container-high hover:bg-surface-container-highest border border-outline-variant text-on-surface font-label-caps text-label-caps font-semibold rounded">
+                    SCHEDULE SOAK/INJ
+                  </button>
+</td>
+</tr>
+<!-- ROW 4: BGW-003 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 border-r border-outline-variant font-bold text-on-surface flex items-center space-x-2">
+<span class="w-2.5 h-2.5 bg-[#B86E18]"></span>
+<span>BGW-003</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant">
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed font-semibold">Soak Phase Day 4/7</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-medium">850 cP</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right">2.10</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-outline bg-surface-container-low">0.0 t/d</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center text-outline">3 Days Soak Left</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-outline">Waiting</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-outline">N/A</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center">
+<span class="px-2 py-0.5 bg-[#EAF2ED] text-secondary font-label-caps text-label-caps font-semibold">SAFE (SOAK)</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 bg-surface-container text-on-surface-variant font-label-caps text-label-caps border border-outline-variant">
+                    SOAK MONITORING
+                  </span>
+</td>
+</tr>
+<!-- ROW 5: BGW-007 -->
+<tr class="hover:bg-surface-container-low transition-colors opacity-75">
+<td class="py-3.5 px-4 border-r border-outline-variant font-bold text-on-surface flex items-center space-x-2">
+<span class="w-2.5 h-2.5 bg-outline"></span>
+<span>BGW-007</span>
+</td>
+<td class="py-3.5 px-4 border-r border-outline-variant">Candidate Cycle 3</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-medium">6,400 cP</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right">3.80</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-on-surface bg-surface-container-low">80.0 t/d</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center text-outline">14 Days Plan</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right text-secondary">+64 BOPD</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-right font-bold text-on-surface">0.80 bbl/t</td>
+<td class="py-3.5 px-4 border-r border-outline-variant text-center">
+<span class="px-2 py-0.5 bg-[#F9F2E7] text-[#B86E18] font-label-caps text-label-caps font-semibold">42% MODERATE</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center px-2.5 py-1 bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps border border-outline-variant">
+                    DEFERRED — BOILER CAP
+                  </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Boiler Allocation Pool Tally Bar -->
+<div class="mt-4 flex flex-wrap items-center justify-between font-telemetry-sm text-telemetry-sm bg-surface-container p-3 border border-outline-variant gap-3">
+<div class="flex flex-wrap items-center space-x-4">
+<span class="font-label-caps text-label-caps text-outline uppercase font-semibold">SCHEDULED CONSUMPTION:</span>
+<span>BGW-004: <strong class="text-on-surface">140 t/d</strong></span>
+<span>+</span>
+<span>BGW-002: <strong class="text-on-surface">120 t/d</strong></span>
+<span>+</span>
+<span>BGW-005 (Pending): <strong class="text-on-surface">110 t/d</strong></span>
+<span>=</span>
+<span class="font-bold text-on-surface">370.0 t/d (82.2% Utilization)</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="text-secondary font-bold font-telemetry-sm text-telemetry-sm">AVAILABLE CONTINGENCY RESERVE: 80.0 t/d</span>
+</div>
+</div>
+</section>
+<!-- 4. BOTTOM ACTION & SETPOINT DISPATCH CONSOLE (STACKED VERTICALLY FULL-WIDTH) -->
+<div class="space-y-6">
+<!-- STACK 1: STEAM DISTRIBUTION MANIFOLD HEALTH -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 shadow-scada-offset">
+<div class="flex flex-wrap items-center justify-between border-b border-outline-variant pb-3 mb-4 gap-2">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-lg text-secondary" data-icon="valve">valve</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider font-semibold">STEAM DISTRIBUTION MANIFOLD HEALTH &amp; FIELD CHOKES</span>
+</div>
+<span class="font-label-caps text-label-caps text-secondary font-bold px-2.5 py-0.5 bg-[#EAF2ED] border border-secondary">100% VALVE INTEGRITY</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-telemetry-sm text-telemetry-sm">
+<div class="p-3.5 bg-surface-container-low border border-outline-variant">
+<span class="font-label-caps text-label-caps block text-outline mb-1">MAIN HEADER LINE PRESSURE</span>
+<span class="font-telemetry-md text-xl font-bold text-on-surface">16.2 MPa</span>
+<span class="font-label-caps text-label-caps text-secondary block mt-1">NOMINAL STABLE (±0.2)</span>
+</div>
+<div class="p-3.5 bg-surface-container-low border border-outline-variant">
+<span class="font-label-caps text-label-caps block text-outline mb-1">MASS FLOW ACCUMULATED TOTAL</span>
+<span class="font-telemetry-md text-xl font-bold text-on-surface">385.2 t/d</span>
+<span class="font-label-caps text-label-caps text-outline block mt-1">CALIBRATED METER #FM-09</span>
+</div>
+<div class="p-3.5 bg-surface-container-low border border-outline-variant">
+<span class="font-label-caps text-label-caps block text-outline mb-1">FEEDWATER PURITY / TDS</span>
+<span class="font-telemetry-md text-xl font-bold text-on-surface">99.2%</span>
+<span class="font-label-caps text-label-caps text-secondary block mt-1">DESALINATED / ULTRA-LOW SILICA</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant flex flex-wrap items-center justify-between font-label-caps text-label-caps text-on-surface-variant gap-2">
+<span>ISOLATION VALVE BGW-002: <strong class="text-secondary font-bold">PRE-CONDITIONED OPEN</strong></span>
+<span>SAFETY RELIEF INTERLOCK: <strong class="text-on-surface font-bold">ARMED &amp; MONITORED</strong></span>
+</div>
+</section>
+<!-- STACK 2: ECONOMIC IMPACT FORECAST -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 shadow-scada-offset">
+<div class="flex flex-wrap items-center justify-between border-b border-outline-variant pb-3 mb-4 gap-2">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-lg text-secondary" data-icon="trending_up">trending_up</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider font-semibold">PROJECTED ECONOMIC IMPACT FORECAST</span>
+</div>
+<span class="font-label-caps text-label-caps px-2.5 py-1 bg-secondary-container text-on-secondary-container font-bold">+18.4% PROJECTED ROI</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-telemetry-sm text-telemetry-sm">
+<div class="p-3.5 bg-[#EAF2ED] border border-secondary">
+<span class="font-label-caps text-label-caps block text-secondary font-semibold mb-1">NET REVENUE DELTA</span>
+<span class="font-telemetry-md text-xl font-bold text-secondary">+$184.2k</span>
+<span class="font-label-caps text-label-caps text-secondary block mt-1">PER 30-DAY CYCLIC RUN</span>
+</div>
+<div class="p-3.5 bg-surface-container-low border border-outline-variant">
+<span class="font-label-caps text-label-caps block text-outline mb-1">FUEL GAS CONSUMPTION SAVED</span>
+<span class="font-telemetry-md text-xl font-bold text-on-surface">14.2 MMBtu/d</span>
+<span class="font-label-caps text-label-caps text-outline block mt-1">BURNER TUNING OPTIMIZATION</span>
+</div>
+<div class="p-3.5 bg-surface-container-low border border-outline-variant">
+<span class="font-label-caps text-label-caps block text-outline mb-1">CARBON EMISSIONS INTENSITY</span>
+<span class="font-telemetry-md text-xl font-bold text-secondary">-12.0%</span>
+<span class="font-label-caps text-label-caps text-secondary block mt-1">kg CO₂e/bbl STEAM DISPLACED</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant flex flex-wrap items-center justify-between font-label-caps text-label-caps text-on-surface-variant gap-2">
+<span>STEAM INJECTION ENERGY BALANCE: <strong class="text-secondary font-bold">OPTIMIZED</strong></span>
+<span class="text-secondary font-bold">ESTIMATED NET CRUDE OIL GAIN: +285 BOPD TOTAL</span>
+</div>
+</section>
+<!-- STACK 3: MODBUS RTU SETPOINT DISPATCH CONSOLE -->
+<section class="bg-primary-container text-on-primary border border-outline-variant p-6 shadow-scada-offset">
+<div class="flex flex-wrap items-center justify-between pb-3 border-b border-[#332A24] mb-4 gap-2">
+<div class="flex items-center space-x-3">
+<span class="w-3 h-3 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-secondary-container uppercase tracking-wider font-bold">MODBUS RTU SETPOINT DISPATCH ENGINE</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-primary-container">PLC COMM PROTOCOL: SECURE CLOSED-LOOP</span>
+</div>
+<p class="font-body-md text-body-md text-on-primary-container mb-6 max-w-3xl">
+      Commits steam allocation quotas directly to field PLCs (Boiler units &amp; manifold control chokes). Requires operator authorization token prior to signal broadcast.
+    </p>
+<div class="flex flex-wrap items-center gap-3">
+<button class="flex-1 py-3 px-6 bg-secondary hover:bg-[#1e583f] text-on-secondary font-telemetry-md text-telemetry-md font-bold rounded flex items-center justify-center space-x-2 transition-transform active:scale-[0.99] border border-secondary-container">
+<span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">COMMIT STEAM ALLOCATION &amp; DISPATCH SETPOINTS</span>
+</button>
+<button class="py-3 px-4 bg-[#2C231F] hover:bg-inverse-surface border border-outline-variant text-surface rounded flex items-center space-x-2" title="View Modbus Payload">
+<span class="material-symbols-outlined text-base" data-icon="terminal">terminal</span>
+<span class="font-label-caps text-label-caps uppercase">VIEW RTU PAYLOAD</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

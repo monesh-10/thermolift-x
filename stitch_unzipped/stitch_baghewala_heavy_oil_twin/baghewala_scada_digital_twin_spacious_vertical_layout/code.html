@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OIL INDIA LIMITED // BAGHEWALA SCADA TWIN (SIH 26120)</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#ede0da",
+            "outline-variant": "#d1c4be",
+            "on-primary-fixed-variant": "#4d4541",
+            "on-primary-fixed": "#211a17",
+            "on-surface": "#1c1c19",
+            "tertiary-container": "#2d1600",
+            "surface-container-highest": "#e5e2dd",
+            "surface-container-lowest": "#ffffff",
+            "error-container": "#ffdad6",
+            "outline": "#7f7570",
+            "tertiary": "#000000",
+            "on-tertiary-fixed": "#2d1600",
+            "on-secondary-container": "#296f50",
+            "surface-container-low": "#f6f3ee",
+            "surface-dim": "#dcdad5",
+            "on-secondary-fixed": "#002113",
+            "tertiary-fixed": "#ffdcbf",
+            "on-tertiary-fixed-variant": "#6b3b00",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e5e2dd",
+            "surface-container": "#f0ede9",
+            "on-primary-container": "#8c827d",
+            "on-tertiary": "#ffffff",
+            "primary-container": "#211a17",
+            "error": "#ba1a1a",
+            "inverse-surface": "#31302d",
+            "surface-container-high": "#ebe8e3",
+            "on-tertiary-container": "#bd721d",
+            "background": "#fcf9f4",
+            "secondary": "#246a4c",
+            "secondary-fixed-dim": "#8fd5b0",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed-variant": "#005235",
+            "on-error": "#ffffff",
+            "secondary-fixed": "#abf2cb",
+            "surface-bright": "#fcf9f4",
+            "on-surface-variant": "#4e4541",
+            "inverse-on-surface": "#f3f0eb",
+            "inverse-primary": "#d0c4bf",
+            "secondary-container": "#a8efc8",
+            "primary": "#000000",
+            "on-background": "#1c1c19",
+            "on-primary": "#ffffff",
+            "tertiary-fixed-dim": "#ffb874",
+            "surface": "#fcf9f4",
+            "surface-tint": "#665d58",
+            "primary-fixed-dim": "#d0c4bf"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "telemetry-display": ["JetBrains Mono"],
+            "telemetry-md": ["JetBrains Mono"],
+            "telemetry-sm": ["JetBrains Mono"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-xl": ["Inter"],
+            "headline-md": ["Inter"],
+            "telemetry-lg": ["JetBrains Mono"],
+            "label-caps": ["JetBrains Mono"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    input[type=range] {
+      accent-color: #211a17;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f0ede9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #d1c4be;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-base select-none min-h-screen flex flex-col overflow-x-hidden">
+<!-- TOP SYSTEM TASKBAR -->
+<header class="w-full h-14 flex justify-between items-center px-6 md:px-8 border-b border-outline-variant bg-primary-container text-on-primary sticky top-0 z-50">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 border-r border-outline-variant pr-6 py-1">
+<div class="w-7 h-7 bg-error flex items-center justify-center font-telemetry-sm text-xs font-bold text-on-error rounded">OIL</div>
+<span class="font-telemetry-lg text-sm sm:text-base tracking-wider text-surface font-semibold">OIL INDIA LIMITED // BAGHEWALA SCADA TWIN</span>
+</div>
+<div class="hidden xl:flex items-center gap-2 font-telemetry-sm text-xs text-on-primary-container">
+<span>Field: <strong class="text-surface font-semibold text-sm">Jodhpur Sandstone (17.4° API)</strong></span>
+<span class="text-outline">|</span>
+<span id="active-well-badge">Active: <strong class="text-secondary-fixed font-semibold text-sm">BGW-002</strong></span>
+</div>
+</div>
+<!-- Center Heartbeat / Sync Telemetry -->
+<div class="hidden lg:flex items-center gap-4 bg-inverse-surface px-4 py-1.5 border border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed animate-ping"></span>
+<span class="font-telemetry-sm text-xs text-secondary-fixed font-semibold">SYNC 2.4s</span>
+</div>
+<span class="text-outline">/</span>
+<span class="font-label-caps text-xs text-surface">15/15 ONLINE</span>
+<span class="text-outline">/</span>
+<span class="font-label-caps text-xs text-on-primary-container">CLOSED-LOOP GOVERNOR: <span class="text-secondary-fixed font-bold">ACTIVE</span></span>
+</div>
+<!-- Right Taskbar Controls -->
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface text-on-surface font-telemetry-sm text-xs border border-outline-variant hover:bg-inverse-surface hover:text-surface transition-colors" id="toggle-drawer-btn">
+<span class="material-symbols-outlined text-[16px]">model_training</span>
+<span>PHYSICS TWIN DOCS</span>
+<span class="material-symbols-outlined text-[15px]" id="drawer-arrow">expand_more</span>
+</button>
+<button class="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-primary-container text-surface border border-outline-variant font-telemetry-sm text-xs hover:bg-inverse-surface transition-colors" onclick="triggerAuditExport()">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>AUDIT LOG</span>
+</button>
+<div class="flex items-center gap-2 pl-3 border-l border-outline-variant text-on-primary-container font-telemetry-sm text-xs">
+<span class="material-symbols-outlined text-surface">terminal</span>
+<span class="hidden 2xl:inline text-surface">SR. ENG. (OIL RAJASTHAN)</span>
+</div>
+</div>
+</header>
+<!-- EXPANDABLE HOW IT WORKS PHYSICS DRAWER -->
+<section class="hidden w-full bg-surface-container-low border-b border-outline-variant p-8 shadow-sm transition-all duration-300" id="physics-drawer">
+<div class="max-w-7xl mx-auto space-y-6">
+<div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl">schema</span>
+<h2 class="font-headline-md text-xl md:text-2xl font-bold tracking-tight text-on-surface">COUPLED RESERVOIR-WELLBORE PHYSICS + NEURAL RECTIFICATION ENGINE</h2>
+</div>
+<span class="font-label-caps text-xs text-on-surface-variant">SIH PROBLEM CODE: 26120 // PETROLEUM INDUSTRIAL RIGOR</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest p-6 border border-outline-variant space-y-2">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-xs font-bold text-on-tertiary-container">STEP 01 // TRANSIENT HEAT</span>
+<span class="material-symbols-outlined text-on-surface-variant">device_thermostat</span>
+</div>
+<h3 class="font-headline-md text-base font-bold text-on-surface">Thermal Decay Model</h3>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">Transient radial heat conduction from Jodhpur Sandstone through annulus. Simulates crude cooling from 120°C soak to critical 50°C rod-stalling regime.</p>
+<div class="mt-3 text-on-surface font-telemetry-sm text-xs bg-surface-container p-2 border border-outline-variant">
+            ∂T/∂t = α (∂²T/∂r² + 1/r ∂T/∂r)
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest p-6 border border-outline-variant space-y-2">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-xs font-bold text-secondary">STEP 02 // DAMPED WAVE</span>
+<span class="material-symbols-outlined text-secondary">waves</span>
+</div>
+<h3 class="font-headline-md text-base font-bold text-on-surface">Gibbs Wave Solver</h3>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">Finite-difference solution of the Gibbs Damped Wave equation. Differentiates mechanical fluid pound, gas interference, and buoyant rod floating in heavy oil.</p>
+<div class="mt-3 text-on-surface font-telemetry-sm text-xs bg-surface-container p-2 border border-outline-variant">
+            ∂²u/∂t² = a² ∂²u/∂x² - c(∂u/∂t)
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest p-6 border border-outline-variant space-y-2">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-xs font-bold text-on-surface">STEP 03 // HYBRID PINN</span>
+<span class="material-symbols-outlined text-on-surface">neurology</span>
+</div>
+<h3 class="font-headline-md text-base font-bold text-on-surface">Joint CSS-SPM Optimizer</h3>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">Physics-Informed ML optimizes cyclic steam volume allocation and modulates VFD strokes-per-minute (SPM) to maximize net oil while maintaining rod tension.</p>
+<div class="mt-3 text-on-surface font-telemetry-sm text-xs bg-surface-container p-2 border border-outline-variant">
+            min J = SOR(t) - λ·Q_oil + γ·F_drag
+</div>
+</div>
+<!-- Step 4 -->
+<div class="bg-surface-container-lowest p-6 border border-outline-variant space-y-2">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-xs font-bold text-error">STEP 04 // SAFETY INTERLOCK</span>
+<span class="material-symbols-outlined text-error">security</span>
+</div>
+<h3 class="font-headline-md text-base font-bold text-on-surface">Closed-Loop Governor</h3>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">Hard SCADA boundaries prevent rod compressive buckling during downstroke, fatigue parting, and thermal tubing shock during unannounced cooling events.</p>
+<div class="mt-3 text-on-surface font-telemetry-sm text-xs bg-surface-container p-2 border border-outline-variant">
+            F_buoyant &lt; 0.85 × W_air_rod (LIMIT)
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECONDARY TAB NAVIGATION BAR -->
+<nav class="w-full bg-surface-container-low border-b border-outline-variant px-6 md:px-8 flex items-center justify-between">
+<div class="flex space-x-4" id="main-viewport-tabs">
+<button class="px-4 py-3 font-telemetry-sm text-xs md:text-sm font-semibold border-b-2 border-primary text-on-surface flex items-center gap-2 transition-colors" id="btn-tab-twin" onclick="switchTab('tab-twin')">
+<span class="material-symbols-outlined text-base">monitor_heart</span>
+<span>Live Twin &amp; Simulator</span>
+</button>
+<button class="px-4 py-3 font-telemetry-sm text-xs md:text-sm text-on-surface-variant hover:text-on-surface border-b-2 border-transparent flex items-center gap-2 transition-colors" id="btn-tab-css" onclick="switchTab('tab-css')">
+<span class="material-symbols-outlined text-base">heat_pump</span>
+<span>CSS Allocation Planner</span>
+</button>
+<button class="px-4 py-3 font-telemetry-sm text-xs md:text-sm text-on-surface-variant hover:text-on-surface border-b-2 border-transparent flex items-center gap-2 transition-colors" id="btn-tab-incident" onclick="switchTab('tab-incident')">
+<span class="material-symbols-outlined text-base">troubleshoot</span>
+<span>Incident Replay &amp; Faults</span>
+</button>
+<button class="px-4 py-3 font-telemetry-sm text-xs md:text-sm text-on-surface-variant hover:text-on-surface border-b-2 border-transparent flex items-center gap-2 transition-colors" id="btn-tab-audit" onclick="switchTab('tab-audit')">
+<span class="material-symbols-outlined text-base">receipt_long</span>
+<span>Well Audit Log</span>
+</button>
+</div>
+<div class="hidden md:flex items-center gap-2">
+<span class="font-label-caps text-xs text-on-surface-variant">SCADA PROTOCOL: MODBUS TCP/IP (RTU-BGW-77)</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+</nav>
+<!-- MAIN SCADA WORKSTATION LAYOUT -->
+<div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+<!-- LEFT MULTI-WELL FLEET SELECTOR -->
+<aside class="w-full md:w-84 lg:w-96 bg-surface-container-low border-r border-outline-variant flex flex-col shrink-0 custom-scrollbar h-[calc(100vh-7rem)]">
+<!-- Fleet Filter & Header -->
+<div class="p-6 border-b border-outline-variant space-y-4 bg-surface-container">
+<div class="flex justify-between items-center">
+<div>
+<span class="font-label-caps text-xs text-on-surface-variant block uppercase tracking-wider font-semibold">FLEET SELECTOR</span>
+<span class="font-headline-md text-xl text-on-surface font-bold">15 WELLHEADS</span>
+</div>
+<button class="px-3 py-1.5 bg-error text-on-error font-telemetry-sm text-xs font-bold rounded hover:bg-on-error-container transition-colors tracking-wide" title="Emergency Shut-In for Baghewala Cluster">
+            ESD SHUT-IN
+          </button>
+</div>
+<!-- Well Quick Search -->
+<div class="relative">
+<input class="w-full bg-surface-container-lowest text-on-surface border border-outline-variant px-3 py-2 font-telemetry-sm text-xs focus:outline-none focus:border-on-surface" placeholder="Filter Well ID, Status, or Cycle..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant text-base">filter_alt</span>
+</div>
+<!-- Fleet Category Filter Pills -->
+<div class="flex flex-wrap gap-1.5 pt-1 font-label-caps text-xs">
+<button class="px-2.5 py-1 bg-primary text-on-primary border border-primary font-bold">ALL (15)</button>
+<button class="px-2.5 py-1 bg-surface text-on-surface border border-outline-variant hover:bg-surface-container">INJ (3)</button>
+<button class="px-2.5 py-1 bg-surface text-on-surface border border-outline-variant hover:bg-surface-container">SOAK (2)</button>
+<button class="px-2.5 py-1 bg-surface text-on-surface border border-outline-variant hover:bg-surface-container">PROD (8)</button>
+<button class="px-2.5 py-1 bg-error-container text-on-error-container border border-error font-bold">FLOAT RISK (2)</button>
+</div>
+</div>
+<!-- Scrollable Well Head Cards -->
+<div class="flex-1 overflow-y-auto divide-y divide-outline-variant custom-scrollbar" id="wells-list">
+<!-- BGW-002 (ACTIVE) -->
+<div class="p-6 bg-surface-container-lowest border-l-4 border-error cursor-pointer transition-all hover:bg-surface" id="card-BGW-002" onclick="selectWell('BGW-002')">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-telemetry-lg text-lg font-bold text-on-surface">BGW-002</span>
+<span class="font-label-caps text-xs block text-on-surface-variant mt-0.5">CSS Cycle 4: Day 42 (Prod)</span>
+</div>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container font-label-caps text-xs font-bold border border-error">
+              84% ROD FLOAT CRITICAL
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4 font-telemetry-sm text-xs text-on-surface">
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Viscosity</span><strong class="text-sm">4,820 cP</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Net Flow</span><strong class="text-sm">42.4 bopd</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Inst. SOR</span><strong class="text-sm">3.12</strong></div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs font-telemetry-sm text-on-surface-variant pt-2 border-t border-outline-variant">
+<span>SPM: 6.2 (Overpumping)</span>
+<span class="text-error font-semibold">Compressive Drag 840 lbs</span>
+</div>
+</div>
+<!-- BGW-001 -->
+<div class="p-6 bg-surface-container-low border-l-4 border-secondary cursor-pointer transition-all hover:bg-surface-container-highest" id="card-BGW-001" onclick="selectWell('BGW-001')">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-telemetry-lg text-lg font-bold text-on-surface">BGW-001</span>
+<span class="font-label-caps text-xs block text-on-surface-variant mt-0.5">CSS Cycle 3: Day 12 (Prod)</span>
+</div>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container font-label-caps text-xs font-bold border border-secondary">
+              12% NOMINAL
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4 font-telemetry-sm text-xs text-on-surface">
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Viscosity</span><strong class="text-sm">1,240 cP</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Net Flow</span><strong class="text-sm">88.0 bopd</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Inst. SOR</span><strong class="text-sm">2.45</strong></div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs font-telemetry-sm text-on-surface-variant pt-2 border-t border-outline-variant">
+<span>SPM: 4.5 (Optimized)</span>
+<span class="text-secondary font-semibold">Tension Nominal</span>
+</div>
+</div>
+<!-- BGW-003 -->
+<div class="p-6 bg-surface-container-low border-l-4 border-outline-variant cursor-pointer transition-all hover:bg-surface-container-highest" id="card-BGW-003" onclick="selectWell('BGW-003')">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-telemetry-lg text-lg font-bold text-on-surface">BGW-003</span>
+<span class="font-label-caps text-xs block text-on-surface-variant mt-0.5">CSS Cycle 5: Soak Day 4</span>
+</div>
+<span class="px-2 py-0.5 bg-surface-container text-on-surface font-label-caps text-xs border border-outline">
+              4% SOAKING
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4 font-telemetry-sm text-xs text-on-surface">
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Viscosity</span><strong class="text-sm">850 cP</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Net Flow</span><strong class="text-sm">0.0 bopd</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Formation</span><strong class="text-sm">210°C</strong></div>
+</div>
+</div>
+<!-- BGW-004 -->
+<div class="p-6 bg-surface-container-low border-l-4 border-tertiary-fixed-dim cursor-pointer transition-all hover:bg-surface-container-highest" id="card-BGW-004" onclick="selectWell('BGW-004')">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-telemetry-lg text-lg font-bold text-on-surface">BGW-004</span>
+<span class="font-label-caps text-xs block text-on-surface-variant mt-0.5">CSS Cycle 2: Steam Inj Day 6</span>
+</div>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed font-label-caps text-xs font-bold border border-tertiary">
+              STEAM INJECTION
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4 font-telemetry-sm text-xs text-on-surface">
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Pressure</span><strong class="text-sm">1,820 psi</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Quality</span><strong class="text-sm">82%</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Steam Temp</span><strong class="text-sm">284°C</strong></div>
+</div>
+</div>
+<!-- BGW-005 -->
+<div class="p-6 bg-surface-container-low border-l-4 border-error cursor-pointer transition-all hover:bg-surface-container-highest" id="card-BGW-005" onclick="selectWell('BGW-005')">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-telemetry-lg text-lg font-bold text-on-surface">BGW-005</span>
+<span class="font-label-caps text-xs block text-on-surface-variant mt-0.5">CSS Cycle 4: Day 58 (Late Prod)</span>
+</div>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container font-label-caps text-xs font-bold border border-error">
+              91% HIGH RISK
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4 font-telemetry-sm text-xs text-on-surface">
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Viscosity</span><strong class="text-sm">8,900 cP</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Net Flow</span><strong class="text-sm">18.2 bopd</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Inst. SOR</span><strong class="text-sm">4.85</strong></div>
+</div>
+</div>
+<!-- BGW-006 -->
+<div class="p-6 bg-surface-container-low border-l-4 border-secondary cursor-pointer transition-all hover:bg-surface-container-highest" id="card-BGW-006" onclick="selectWell('BGW-006')">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-telemetry-lg text-lg font-bold text-on-surface">BGW-006</span>
+<span class="font-label-caps text-xs block text-on-surface-variant mt-0.5">CSS Cycle 1: Day 24 (Prod)</span>
+</div>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container font-label-caps text-xs font-bold border border-secondary">
+              21% NOMINAL
+            </span>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4 font-telemetry-sm text-xs text-on-surface">
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Viscosity</span><strong class="text-sm">1,890 cP</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Net Flow</span><strong class="text-sm">64.1 bopd</strong></div>
+<div><span class="text-on-surface-variant text-[11px] block uppercase font-medium">Inst. SOR</span><strong class="text-sm">2.80</strong></div>
+</div>
+</div>
+</div>
+<!-- Field Rig Operational Stamp -->
+<div class="p-4 bg-surface-container-highest border-t border-outline-variant flex items-center justify-between font-label-caps text-xs text-on-surface-variant">
+<span>BAGHEWALA RIG OPS #4</span>
+<span>MODBUS 192.168.12.8</span>
+</div>
+</aside>
+<!-- MAIN SCADA WORKSTATION VIEWPORT -->
+<main class="flex-1 bg-background overflow-y-auto p-6 md:p-10 lg:p-12 custom-scrollbar h-[calc(100vh-7rem)]">
+<!-- TAB 1: LIVE TWIN & SIMULATOR CONSOLE (DEFAULT ACTIVE) -->
+<section class="space-y-10" id="tab-twin">
+<!-- A. Well Header Status Ribbon -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 flex flex-wrap items-center justify-between gap-y-4">
+<div class="flex flex-wrap items-center gap-4 md:gap-6">
+<span class="px-3 py-1 bg-primary text-on-primary font-telemetry-md text-base md:text-lg font-bold" id="telemetry-well-id">BGW-002</span>
+<span class="font-label-caps text-xs text-on-surface-variant">DEPTH: <strong class="text-on-surface font-telemetry-sm text-sm">950 m</strong></span>
+<span class="text-outline-variant">|</span>
+<span class="font-label-caps text-xs text-on-surface-variant">CRUDE: <strong class="text-on-surface font-telemetry-sm text-sm">17.2° API</strong></span>
+<span class="text-outline-variant">|</span>
+<span class="font-label-caps text-xs text-on-surface-variant">RES TEMP: <strong class="text-on-surface font-telemetry-sm text-sm">47.2°C</strong></span>
+<span class="text-outline-variant">|</span>
+<span class="font-label-caps text-xs text-on-surface-variant">FLOWLINE: <strong class="text-error font-telemetry-sm text-sm font-bold" id="ribbon-flowline-temp">68.4°C</strong></span>
+<span class="text-outline-variant">|</span>
+<span class="font-label-caps text-xs text-on-surface-variant">TAPER: <strong class="text-on-surface font-telemetry-sm text-sm">7/8" (35%) + 3/4" (65%) Grade D</strong></span>
+</div>
+<div class="flex items-center gap-6 font-telemetry-sm text-sm">
+<span class="text-on-surface-variant">VFD MOTOR LOAD: <strong class="text-on-tertiary-container font-bold text-base" id="ribbon-vfd-load">86.4%</strong></span>
+<span class="text-on-surface-variant">LAST TELEMETRY: <strong class="text-on-surface font-semibold" id="live-timestamp">10:42:18 IST</strong></span>
+</div>
+</div>
+<!-- B. STACKED FULL-WIDTH SUBSURFACE & PHYSICS VISUALIZERS (Stacked 1-by-1 vertically) -->
+<div class="space-y-8">
+<!-- TOP VISUALIZER: Live Gibbs Downhole Dynamometer Card (Full Width) -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex flex-wrap justify-between items-start pb-4 border-b border-outline-variant gap-3">
+<div>
+<span class="font-label-caps text-xs uppercase tracking-wider text-on-surface-variant block mb-1">GIBBS DAMPED WAVE DYNAMOMETER ENGINE</span>
+<h4 class="font-headline-lg text-xl md:text-2xl font-bold text-on-surface">Downhole Pump vs. Surface Load</h4>
+</div>
+<div class="px-3 py-1 bg-error-container text-on-error-container font-label-caps text-xs md:text-sm font-bold border border-error" id="dynacard-status-pill">
+            SEVERE DOWNSTROKE BUOYANT DRAG (84% FLOAT RISK)
+          </div>
+</div>
+<!-- Dynacard SVG Plot Canvas (Spacious full width) -->
+<div class="relative w-full h-80 md:h-96 bg-surface-container-low border border-outline-variant flex items-center justify-center p-4">
+<svg class="w-full h-full" id="dynacard-svg" viewbox="0 0 700 280">
+<!-- Grid Lines -->
+<defs>
+<pattern height="35" id="dynoGrid" patternunits="userSpaceOnUse" width="70">
+<path d="M 70 0 L 0 0 0 35" fill="none" stroke="#e5e2dd" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect fill="url(#dynoGrid)" height="280" width="700"></rect>
+<!-- Axis Labels & Units -->
+<text fill="#7f7570" font-family="JetBrains Mono" font-size="12" font-weight="600" x="15" y="24">Load (lbs × 1,000)</text>
+<text fill="#7f7570" font-family="JetBrains Mono" font-size="12" font-weight="600" x="600" y="270">Stroke (in)</text>
+<!-- 0, 10, 20 klbs Markers -->
+<line stroke="#d1c4be" stroke-dasharray="3,3" x1="50" x2="680" y1="35" y2="35"></line>
+<text fill="#1c1c19" font-family="JetBrains Mono" font-size="11" x="20" y="39">20k</text>
+<line stroke="#d1c4be" stroke-dasharray="3,3" x1="50" x2="680" y1="140" y2="140"></line>
+<text fill="#1c1c19" font-family="JetBrains Mono" font-size="11" x="20" y="144">10k</text>
+<line stroke="#d1c4be" stroke-dasharray="3,3" x1="50" x2="680" y1="245" y2="245"></line>
+<text fill="#1c1c19" font-family="JetBrains Mono" font-size="11" x="20" y="249">0k</text>
+<!-- Highlighted Shaded Critical Rod Float / Compressive Distortion Area -->
+<path d="M 160 215 L 360 225 L 480 205 L 440 170 L 220 170 Z" fill="#ffdad6" id="float-distortion-area" opacity="0.75"></path>
+<text fill="#93000a" font-family="JetBrains Mono" font-size="11" font-weight="700" id="float-distortion-text" x="240" y="196">COMPRESSIVE BUCKLING ZONE</text>
+<!-- Surface Card Polyline (Dashed Line) -->
+<path d="M 100 215 C 100 65, 180 50, 620 45 C 650 45, 650 195, 600 205 C 450 220, 220 225, 100 215 Z" fill="none" id="surface-dyno-curve" stroke="#1c1c19" stroke-dasharray="5,4" stroke-width="2.5"></path>
+<!-- Downhole Pump Card (Gibbs Solved: Solid Polygon) -->
+<polygon fill="#246a4c" fill-opacity="0.18" id="downhole-pump-card" points="140,165 600,160 600,85 160,85 140,165" stroke="#246a4c" stroke-width="3"></polygon>
+<!-- Callout Notches -->
+<circle cx="620" cy="45" fill="#ba1a1a" r="4.5"></circle>
+<text fill="#ba1a1a" font-family="JetBrains Mono" font-size="11" font-weight="600" x="480" y="40">PPRL: 18,420 lbs</text>
+<circle cx="100" cy="215" fill="#bd721d" r="4.5"></circle>
+<text fill="#bd721d" font-family="JetBrains Mono" font-size="11" font-weight="600" x="70" y="235">MPRL: 6,100 lbs</text>
+</svg>
+</div>
+<!-- Card Legend & Dynacard Metric Stats -->
+<div class="pt-4 border-t border-outline-variant flex flex-wrap items-center justify-between gap-4 text-sm font-telemetry-sm">
+<div class="flex flex-wrap items-center gap-6">
+<span class="flex items-center gap-2"><span class="w-4 h-0.5 bg-on-surface inline-block border-t border-dashed border-on-surface"></span> Surface Card (Dashed)</span>
+<span class="flex items-center gap-2"><span class="w-4 h-3 bg-secondary inline-block"></span> Downhole Pump Card (Gibbs Solved)</span>
+<span class="flex items-center gap-2 text-error font-medium"><span class="w-3 h-3 bg-error-container border border-error inline-block"></span> Float Distortion Zone</span>
+</div>
+<div class="text-on-surface-variant font-label-caps text-xs font-semibold">
+            ALGORITHM: GIBBS FINITE DIFFERENCE (256 NODES)
+          </div>
+</div>
+</div>
+<!-- BOTTOM VISUALIZER: Wellbore Depth Thermal & Viscosity Profile (Full Width) -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex flex-wrap justify-between items-start pb-4 border-b border-outline-variant gap-3">
+<div>
+<span class="font-label-caps text-xs uppercase tracking-wider text-on-surface-variant block mb-1">WELLBORE VERTICAL THERMAL &amp; VISCOSITY TRANSIENT</span>
+<h4 class="font-headline-lg text-xl md:text-2xl font-bold text-on-surface">Thermal Decay vs. In-Situ Crude Rheology</h4>
+</div>
+<div class="px-3 py-1 bg-surface-container font-label-caps text-xs md:text-sm text-on-surface font-semibold border border-outline-variant">
+            CRITICAL THRESHOLD: 4,000 cP AT 520m
+          </div>
+</div>
+<!-- Vertical Depth Chart Canvas (Spacious full width) -->
+<div class="relative w-full h-80 md:h-96 bg-surface-container-low border border-outline-variant flex items-center justify-center p-4">
+<svg class="w-full h-full" viewbox="0 0 700 280">
+<defs>
+<pattern height="35" id="depthGrid" patternunits="userSpaceOnUse" width="70">
+<path d="M 70 0 L 0 0 0 35" fill="none" stroke="#e5e2dd" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect fill="url(#depthGrid)" height="280" width="700"></rect>
+<!-- Depth markers along X axis (Depth 0m to 950m) -->
+<text fill="#7f7570" font-family="JetBrains Mono" font-size="11" font-weight="600" x="50" y="270">0m (Surface)</text>
+<text fill="#7f7570" font-family="JetBrains Mono" font-size="11" font-weight="600" x="240" y="270">350m</text>
+<text fill="#7f7570" font-family="JetBrains Mono" font-size="11" font-weight="600" x="420" y="270">650m</text>
+<text fill="#7f7570" font-family="JetBrains Mono" font-size="11" font-weight="600" x="590" y="270">950m (Pump Depth)</text>
+<!-- Left Y: Viscosity log scale (0 to 12,000 cP) -->
+<text fill="#246a4c" font-family="JetBrains Mono" font-size="11" font-weight="700" x="12" y="28">12k cP</text>
+<text fill="#246a4c" font-family="JetBrains Mono" font-size="11" font-weight="700" x="12" y="130">6k cP</text>
+<text fill="#246a4c" font-family="JetBrains Mono" font-size="11" font-weight="700" x="12" y="240">1k cP</text>
+<!-- Right Y: Temp scale (0 to 140°C) -->
+<text fill="#bd721d" font-family="JetBrains Mono" font-size="11" font-weight="700" x="645" y="28">140°C</text>
+<text fill="#bd721d" font-family="JetBrains Mono" font-size="11" font-weight="700" x="645" y="130">80°C</text>
+<text fill="#bd721d" font-family="JetBrains Mono" font-size="11" font-weight="700" x="645" y="240">30°C</text>
+<!-- Critical 4000 cP Boundary Line -->
+<line stroke="#ba1a1a" stroke-dasharray="4,4" stroke-width="2" x1="60" x2="640" y1="155" y2="155"></line>
+<text fill="#ba1a1a" font-family="JetBrains Mono" font-size="11" font-weight="700" x="75" y="148">CRITICAL ROD FLOAT VISCOSITY THRESHOLD (4,000 cP)</text>
+<!-- Viscosity Curve -->
+<path d="M 60 45 Q 160 85 320 155 T 640 235" fill="none" id="viscosity-curve-svg" stroke="#246a4c" stroke-width="3"></path>
+<!-- Temperature Curve -->
+<path d="M 60 190 Q 240 150 440 90 T 640 45" fill="none" id="temp-curve-svg" stroke="#bd721d" stroke-width="3"></path>
+<!-- Intersect Pin at 520m (Depth coordinate) -->
+<circle cx="320" cy="155" fill="#ba1a1a" r="5"></circle>
+<text fill="#ba1a1a" font-family="JetBrains Mono" font-size="11" font-weight="700" x="335" y="145">Transition Zone: 520m @ 74°C</text>
+</svg>
+</div>
+<!-- Dual Curves Legend -->
+<div class="pt-4 border-t border-outline-variant flex flex-wrap items-center justify-between gap-4 text-sm font-telemetry-sm">
+<div class="flex flex-wrap items-center gap-6">
+<span class="flex items-center gap-2 text-on-tertiary-container"><span class="w-4 h-1 bg-on-tertiary-container inline-block"></span> Temp Gradient (°C)</span>
+<span class="flex items-center gap-2 text-secondary"><span class="w-4 h-1 bg-secondary inline-block"></span> In-Situ Viscosity (cP)</span>
+<span class="flex items-center gap-2 text-error font-medium"><span class="w-3 h-0.5 bg-error inline-block"></span> 4,000 cP Limit Boundary</span>
+</div>
+<div class="text-on-surface-variant font-label-caps text-xs font-semibold">
+            BAGHEWALA JODHPUR CRUDE CONDUCTION MODEL
+          </div>
+</div>
+</div>
+</div>
+<!-- C. 15-PARAMETER INTERACTIVE LIVE SIMULATOR MATRIX (Stacked clean wide cards sequence) -->
+<div class="space-y-6">
+<div class="flex flex-wrap items-center justify-between pb-3 border-b border-outline-variant gap-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface text-2xl">tune</span>
+<h3 class="font-headline-lg text-xl md:text-2xl text-on-surface font-bold">15-Parameter SCADA Physics &amp; Kinematics Simulator Matrix</h3>
+</div>
+<span class="font-label-caps text-xs text-on-surface-variant font-semibold">REAL-TIME TWIN RE-COMPUTATION ENGINE</span>
+</div>
+<div class="space-y-6">
+<!-- Group 1: Kinematics & VFD -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+<span class="font-label-caps text-xs text-on-surface-variant tracking-wider font-semibold">GROUP 01 // KINEMATICS &amp; VFD CONTROLS</span>
+<span class="font-label-caps text-xs text-secondary font-bold">PRIMARY ACTUATION</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+<!-- Pumping Speed SPM -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm font-telemetry-sm">
+<span class="text-on-surface-variant">Pumping Speed (SPM):</span>
+<span class="font-bold text-on-surface text-lg" id="val-spm">6.2 SPM</span>
+</div>
+<input class="w-full h-2.5 bg-surface-container cursor-pointer" id="slider-spm" max="8.0" min="2.0" oninput="updateSimulation()" step="0.1" type="range" value="6.2"/>
+<div class="flex justify-between text-xs font-telemetry-sm text-on-surface-variant">
+<span>2.0 SPM</span>
+<span class="text-error font-semibold">Float Limit: 4.2 SPM</span>
+<span>8.0 SPM</span>
+</div>
+</div>
+<!-- Stroke Length Selector -->
+<div class="space-y-2">
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase font-medium">Stroke Length</span>
+<div class="grid grid-cols-4 gap-2 font-telemetry-sm text-xs text-center">
+<button class="py-2 border border-outline-variant bg-surface hover:bg-surface-container font-medium">80"</button>
+<button class="py-2 border border-outline-variant bg-surface hover:bg-surface-container font-medium">100"</button>
+<button class="py-2 border border-on-surface bg-primary text-on-primary font-bold">120"</button>
+<button class="py-2 border border-outline-variant bg-surface hover:bg-surface-container font-medium">144"</button>
+</div>
+</div>
+<!-- Rod String Taper -->
+<div class="space-y-1">
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase font-medium">Rod String Taper</span>
+<div class="font-telemetry-sm text-sm font-bold text-on-surface">Grade D (7/8" 35% + 3/4" 65%)</div>
+<span class="text-xs text-on-surface-variant block font-telemetry-sm">Max stress: 32,400 psi</span>
+</div>
+<!-- VFD Motor Load -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-telemetry-sm">
+<span class="text-on-surface-variant">Motor Torque Load:</span>
+<span class="font-bold text-on-tertiary-container text-base" id="val-motor-torque">86.4%</span>
+</div>
+<div class="w-full bg-surface-container h-3 border border-outline-variant overflow-hidden">
+<div class="bg-on-tertiary-container h-full transition-all" id="bar-motor-torque" style="width: 86.4%"></div>
+</div>
+<span class="text-[11px] font-telemetry-sm text-on-surface-variant block">Thermal duty class: continuous</span>
+</div>
+</div>
+</div>
+<!-- Group 2: Thermal & CSS Dynamics -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+<span class="font-label-caps text-xs text-on-surface-variant tracking-wider font-semibold">GROUP 02 // THERMAL &amp; CSS DYNAMICS</span>
+<span class="font-label-caps text-xs text-on-tertiary-container font-bold">IN-SITU HEAT BALANCE</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+<!-- Flowline Temperature -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm font-telemetry-sm">
+<span class="text-on-surface-variant">Flowline Temp:</span>
+<span class="font-bold text-on-surface text-lg" id="val-flowline-temp">68.4 °C</span>
+</div>
+<input class="w-full h-2.5 bg-surface-container cursor-pointer" id="slider-temp" max="110.0" min="40.0" oninput="updateSimulation()" step="0.5" type="range" value="68.4"/>
+<div class="flex justify-between text-xs font-telemetry-sm text-on-surface-variant">
+<span>40°C (Cold Stalling)</span>
+<span>110°C (Hot Steam)</span>
+</div>
+</div>
+<!-- Steam Soak Days -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm font-telemetry-sm">
+<span class="text-on-surface-variant">Steam Soak Time:</span>
+<span class="font-bold text-on-surface text-base">5.0 Days</span>
+</div>
+<input class="w-full h-2.5 bg-surface-container cursor-pointer" max="12" min="1" step="0.5" type="range" value="5.0"/>
+<div class="flex justify-between text-xs font-telemetry-sm text-on-surface-variant">
+<span>Day 1</span>
+<span>Day 12</span>
+</div>
+</div>
+<!-- Steam Quality & Inj Pressure -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Steam Quality</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">78.5%</strong>
+</div>
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Inj Pressure</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">1,650 psi</strong>
+</div>
+</div>
+<!-- Subsurface Temp -->
+<div class="space-y-1">
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Subsurface Temp (500m)</span>
+<strong class="text-on-surface font-telemetry-display text-xl font-bold" id="val-subsurface-temp">74.2 °C</strong>
+<span class="text-xs text-on-surface-variant block font-telemetry-sm">Annulus convective loss: 14.8 W/m</span>
+</div>
+</div>
+</div>
+<!-- Group 3: Crude Rheology & Fluid Mechanics -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+<span class="font-label-caps text-xs text-on-surface-variant tracking-wider font-semibold">GROUP 03 // CRUDE RHEOLOGY &amp; FLUID MECHANICS</span>
+<span class="font-label-caps text-xs text-error font-bold">CRITICAL DRAG INFLUENCE</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+<!-- Dynamic Viscosity (Calculated) -->
+<div class="bg-surface-container p-4 border border-outline-variant space-y-1">
+<span class="font-label-caps text-xs text-on-surface-variant block uppercase font-semibold">CALCULATED DYNAMIC VISCOSITY (μ)</span>
+<div class="flex items-baseline gap-2">
+<span class="font-telemetry-display text-3xl font-bold text-error" id="val-dynamic-viscosity">4,820</span>
+<span class="font-telemetry-sm text-sm text-on-surface-variant font-medium">cP</span>
+</div>
+<span class="text-[11px] font-telemetry-sm text-on-surface-variant block">Jodhpur Sandstone Rheological Model</span>
+</div>
+<!-- Gravity & Water Cut -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Crude Gravity</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">17.2° API</strong>
+</div>
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Water Cut</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">32.4 %</strong>
+</div>
+</div>
+<!-- GOR & Friction -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Gas-Oil Ratio</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">140 scf/bbl</strong>
+</div>
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Fanning Friction</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">0.084</strong>
+</div>
+</div>
+<!-- Yield stress -->
+<div class="space-y-1">
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Casson Yield Stress</span>
+<strong class="text-on-surface font-telemetry-display text-xl font-bold">3.4 Pa</strong>
+<span class="text-xs text-on-surface-variant block font-telemetry-sm">Non-Newtonian heavy oil threshold</span>
+</div>
+</div>
+</div>
+<!-- Group 4: Wellbore & Hydraulics -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex justify-between items-center pb-3 border-b border-outline-variant">
+<span class="font-label-caps text-xs text-on-surface-variant tracking-wider font-semibold">GROUP 04 // WELLBORE HYDRAULICS &amp; PUMP LOAD</span>
+<span class="font-label-caps text-xs text-secondary font-bold">MECHANICAL BOUNDARY</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
+<!-- Pump Fillage -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-telemetry-sm">
+<span class="text-on-surface-variant">Downhole Pump Fillage:</span>
+<span class="font-bold text-on-surface text-base" id="val-fillage">71.8%</span>
+</div>
+<div class="w-full bg-surface-container h-3 border border-outline-variant overflow-hidden">
+<div class="bg-secondary h-full transition-all" id="bar-fillage" style="width: 71.8%"></div>
+</div>
+<span class="text-xs font-telemetry-sm text-on-surface-variant block">Fluid pound threshold: &lt;65%</span>
+</div>
+<!-- Pressure & Depth -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Tubing Backpressure</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">185 psi</strong>
+</div>
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Pump Depth</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">950 m</strong>
+</div>
+</div>
+<!-- Polished Rod Friction -->
+<div>
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Polished Rod Friction</span>
+<strong class="text-on-surface font-telemetry-display text-lg font-bold">420 lbs/ft</strong>
+<span class="text-xs text-on-surface-variant block font-telemetry-sm">Stuffing box nominal drag</span>
+</div>
+<!-- Net string weight -->
+<div class="space-y-1">
+<span class="text-xs font-label-caps text-on-surface-variant block uppercase">Submerged String Weight</span>
+<strong class="text-on-surface font-telemetry-display text-xl font-bold" id="val-rod-weight">11,240 lbs</strong>
+<span class="text-xs text-on-surface-variant block font-telemetry-sm">Buoyancy adjusted in 17.2° API</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- D. STACKED ROOT-CAUSE & RECTIFICATION DIAGNOSTIC INTELLIGENCE PANEL (Stacked Vertically One by One) -->
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-8">
+<div class="flex flex-wrap items-center justify-between pb-4 border-b border-outline-variant gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl">psychology</span>
+<h3 class="font-headline-lg text-xl md:text-2xl text-on-surface font-bold tracking-tight">AUTONOMOUS CLOSED-LOOP DECISION ENGINE // SIH 26120</h3>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-3 h-3 rounded-full bg-error" id="status-bulb"></span>
+<span class="font-label-caps text-xs md:text-sm font-bold text-error tracking-wider" id="status-engine-text">INTERVENTION REQUIRED: ROD COMPRESSION RISK</span>
+</div>
+</div>
+<!-- 3 Vertical Cards Stacked One-by-One -->
+<div class="space-y-6">
+<!-- Step 1: What is happening -->
+<div class="bg-surface-container-low p-6 md:p-8 border border-outline-variant space-y-3">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error text-xl">warning</span>
+<span class="font-label-caps text-xs md:text-sm text-error font-bold tracking-wider">01 // WHAT IS HAPPENING (ANOMALY DETECTION)</span>
+</div>
+<span class="font-label-caps text-xs text-on-surface-variant">REAL-TIME DIAGNOSTIC</span>
+</div>
+<p class="text-on-surface text-base md:text-lg leading-relaxed" id="diagnostic-col1">
+            Downstroke viscous drag (<strong class="text-error font-bold">4,820 cP</strong> at 550m depth) exceeds net rod string buoyant gravity by <strong class="text-error font-bold">840 lbs</strong>. The Gibbs downhole dynacard demonstrates significant rod floating during 42% of the downstroke cycle, inducing severe compressive buckling risk, delayed traveling valve seating, and rod string helical fatigue.
+          </p>
+</div>
+<!-- Step 2: What caused it -->
+<div class="bg-surface-container-low p-6 md:p-8 border border-outline-variant space-y-3">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-tertiary-container text-xl">history</span>
+<span class="font-label-caps text-xs md:text-sm text-on-tertiary-container font-bold tracking-wider">02 // WHAT CAUSED IT (ROOT CAUSE ANALYSIS)</span>
+</div>
+<span class="font-label-caps text-xs text-on-surface-variant">CYCLE HISTORICAL CORRELATION</span>
+</div>
+<p class="text-on-surface text-base md:text-lg leading-relaxed" id="diagnostic-col2">
+            CSS Cycle 4 thermal decay has reached economic transition threshold (flowline temp dropped from 84°C to 68.4°C over 42 days). Concurrently, VFD pumping speed remained unthrottled at <strong class="text-on-tertiary-container font-bold">6.2 SPM</strong>, forcing the rod string descent velocity to exceed the displacement rate of high-viscosity heavy crude.
+          </p>
+</div>
+<!-- Step 3: AI Rectification Setpoints -->
+<div class="bg-surface-container-low p-6 md:p-8 border border-outline-variant space-y-4">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-xl">auto_fix_high</span>
+<span class="font-label-caps text-xs md:text-sm text-secondary font-bold tracking-wider">03 // AI RECTIFICATION SETPOINTS (CLOSED-LOOP PRESCRIPTION)</span>
+</div>
+<span class="font-label-caps text-xs text-secondary font-bold">OPTIMIZATION READY</span>
+</div>
+<div class="text-on-surface text-base md:text-lg leading-relaxed space-y-3" id="diagnostic-col3">
+<div class="flex items-start gap-3">
+<span class="w-6 h-6 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</span>
+<p><strong class="text-secondary font-bold">Modulate VFD Pumping Speed:</strong> Reduce pumping rate from 6.2 SPM down to 3.8 SPM to restore positive rod string tension throughout descent.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="w-6 h-6 rounded bg-primary text-on-primary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</span>
+<p><strong class="text-on-surface font-bold">Boost Surface Thermal Tracing:</strong> Energize wellhead electric heat trace from idle to 14 kW capacity.</p>
+</div>
+<div class="flex items-start gap-3">
+<span class="w-6 h-6 rounded bg-primary text-on-primary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</span>
+<p><strong class="text-on-surface font-bold">Schedule CSS Cycle 5:</strong> Queue steam re-injection within 9 operational days based on economic SOR projections.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Bottom Action Bar -->
+<div class="pt-6 border-t border-outline-variant flex flex-wrap items-center justify-between gap-6 bg-surface-container p-6">
+<div class="flex flex-wrap items-center gap-4">
+<button class="px-6 py-3.5 bg-primary text-on-primary font-telemetry-md text-sm md:text-base font-bold flex items-center gap-3 hover:bg-inverse-surface border border-primary transition-all shadow-sm" id="apply-ai-btn" onclick="applyAiRectification()">
+<span class="material-symbols-outlined text-secondary-fixed text-xl">electric_bolt</span>
+<span>APPLY 1-CLICK AI RECTIFICATION SETPOINTS (Modulate SPM to 3.8)</span>
+</button>
+<button class="px-6 py-3.5 bg-surface text-on-surface font-telemetry-md text-sm md:text-base border border-outline-variant hover:bg-surface-container-highest transition-colors font-medium" onclick="manualOverrideAlert()">
+              MANUAL OVERRIDE
+            </button>
+</div>
+<div class="flex items-center gap-4 font-telemetry-sm text-sm">
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input checked="" class="w-4 h-4 text-primary rounded-none focus:ring-0" type="checkbox"/>
+<span class="text-on-surface font-semibold">Closed-Loop Auto Governor: <span class="text-secondary font-bold">ACTIVE</span></span>
+</label>
+<span class="text-outline-variant">|</span>
+<span class="text-on-surface-variant font-medium">SAFETY INTERLOCK: BGW-ESD-OK</span>
+</div>
+</div>
+</div>
+</section>
+<!-- TAB 2: CSS CYCLE & STEAM ALLOCATION PLANNER -->
+<section class="hidden space-y-8" id="tab-css">
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex flex-wrap justify-between items-center pb-4 border-b border-outline-variant gap-3">
+<div>
+<span class="font-label-caps text-xs text-secondary font-bold uppercase tracking-wider">CYCLIC STEAM STIMULATION (CSS) FLEET OPTIMIZER</span>
+<h3 class="font-headline-lg text-xl md:text-2xl text-on-surface font-bold">Cluster Steam Budget Allocation &amp; Cumulative SOR</h3>
+</div>
+<span class="px-4 py-2 bg-surface-container text-on-surface font-telemetry-sm text-sm font-semibold border border-outline-variant">
+              STEAM GENERATOR CAPACITY: 120 Tonnes/Day (Available: 28 Tonnes)
+            </span>
+</div>
+<!-- CSS Multi-Well Scheduling Matrix -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-telemetry-sm text-sm border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant text-on-surface-variant font-label-caps text-xs">
+<th class="p-4">WELL ID</th>
+<th class="p-4">CURRENT PHASE</th>
+<th class="p-4">DAYS IN PHASE</th>
+<th class="p-4">CUMULATIVE STEAM (T)</th>
+<th class="p-4">OIL PROD (BOPD)</th>
+<th class="p-4">INST. SOR</th>
+<th class="p-4">OPTIMAL RE-INJECTION DATE</th>
+<th class="p-4">RECOMMENDED ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low">
+<td class="p-4 font-bold text-base text-on-surface">BGW-001</td>
+<td class="p-4"><span class="px-2.5 py-1 bg-secondary-container text-on-secondary-container font-semibold">Production</span></td>
+<td class="p-4">Day 12 / 60</td>
+<td class="p-4 font-semibold">1,850 T</td>
+<td class="p-4 font-bold text-secondary text-base">88.0 bopd</td>
+<td class="p-4">2.45</td>
+<td class="p-4 font-medium">48 Days Remaining</td>
+<td class="p-4 text-on-surface">Maintain Current SPM (4.5)</td>
+</tr>
+<tr class="hover:bg-surface-container-low bg-error-container/20">
+<td class="p-4 font-bold text-base text-error">BGW-002</td>
+<td class="p-4"><span class="px-2.5 py-1 bg-error-container text-on-error-container font-bold">Late Prod (Thermal Decay)</span></td>
+<td class="p-4">Day 42 / 50</td>
+<td class="p-4 font-semibold">2,100 T</td>
+<td class="p-4 font-bold text-error text-base">42.4 bopd</td>
+<td class="p-4 text-error font-bold">3.12</td>
+<td class="p-4 text-error font-bold">In 8 Days (CSS Cycle 5)</td>
+<td class="p-4 font-bold text-error">Throttle SPM &amp; Prep Steam Hookup</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-4 font-bold text-base text-on-surface">BGW-003</td>
+<td class="p-4"><span class="px-2.5 py-1 bg-surface-container text-on-surface font-medium">Soaking Phase</span></td>
+<td class="p-4">Day 4 / 6</td>
+<td class="p-4 font-semibold">2,400 T</td>
+<td class="p-4 text-on-surface-variant">0.0 (Soaking)</td>
+<td class="p-4">--</td>
+<td class="p-4 font-medium">Commence Flowback: Day 6</td>
+<td class="p-4 text-on-surface">Keep Wellhead Closed, Monitor P_res</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-4 font-bold text-base text-on-surface">BGW-004</td>
+<td class="p-4"><span class="px-2.5 py-1 bg-tertiary-fixed text-on-tertiary-fixed font-bold">Active Steam Injection</span></td>
+<td class="p-4">Day 6 / 10</td>
+<td class="p-4 font-semibold">1,620 T (80 T/d)</td>
+<td class="p-4 text-on-surface-variant">0.0 (Injecting)</td>
+<td class="p-4">--</td>
+<td class="p-4 font-medium">Soak Commences: Day 10</td>
+<td class="p-4 text-on-surface">Maintain 1,820 psi Steam Head</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-4 font-bold text-base text-error">BGW-005</td>
+<td class="p-4"><span class="px-2.5 py-1 bg-error-container text-on-error-container font-bold">Thermal Exhaustion</span></td>
+<td class="p-4">Day 58 / 55</td>
+<td class="p-4 font-semibold">2,300 T</td>
+<td class="p-4 font-bold text-error text-base">18.2 bopd</td>
+<td class="p-4 text-error font-bold">4.85</td>
+<td class="p-4 text-error font-bold">OVERDUE BY 3 DAYS</td>
+<td class="p-4 font-bold text-error">Shut in pump immediately; allocate steam</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- TAB 3: INCIDENT REPLAY & DYNACARD FAULT LIBRARY -->
+<section class="hidden space-y-8" id="tab-incident">
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex flex-wrap justify-between items-center pb-4 border-b border-outline-variant gap-3">
+<div>
+<span class="font-label-caps text-xs text-on-surface-variant uppercase tracking-wider">SCADA HISTORICAL REPLAY</span>
+<h3 class="font-headline-lg text-xl md:text-2xl text-on-surface font-bold">Downhole Dynacard Fault Classification Library</h3>
+</div>
+<span class="font-label-caps text-xs text-secondary font-bold">MODEL ACCURACY: 98.4% ON BAGHEWALA BENCHMARKS</span>
+</div>
+<div class="space-y-6">
+<!-- Fault Card 1 -->
+<div class="bg-surface-container-low p-6 md:p-8 border border-outline-variant space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-xs text-error font-bold">FAULT PATTERN A-01</span>
+<span class="font-label-caps text-xs text-on-surface-variant">SEVERITY: CRITICAL</span>
+</div>
+<h4 class="font-headline-md text-lg md:text-xl text-on-surface font-bold">Severe Buoyant Rod Float</h4>
+<div class="w-full h-40 bg-surface border border-outline-variant flex items-center justify-center p-4">
+<svg class="w-full h-full" viewbox="0 0 400 120">
+<path d="M 40 95 C 40 25, 100 20, 340 20 C 360 20, 360 85, 320 90 C 240 100, 120 105, 40 95 Z" fill="none" stroke="#ba1a1a" stroke-width="2.5"></path>
+<rect fill="#ffdad6" height="25" opacity="0.8" width="120" x="140" y="80"></rect>
+<text fill="#93000a" font-family="JetBrains Mono" font-size="10" font-weight="700" x="160" y="96">FLOAT DRAG DISTORTION</text>
+</svg>
+</div>
+<p class="font-body-md text-sm md:text-base text-on-surface-variant leading-relaxed">Signature: Bottom downstroke curve drops sharply and stretches horizontally. Compression occurs when heavy oil viscous drag exceeds rod buoyant weight.</p>
+</div>
+<!-- Fault Card 2 -->
+<div class="bg-surface-container-low p-6 md:p-8 border border-outline-variant space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-xs text-on-tertiary-container font-bold">FAULT PATTERN A-02</span>
+<span class="font-label-caps text-xs text-on-surface-variant">SEVERITY: MODERATE</span>
+</div>
+<h4 class="font-headline-md text-lg md:text-xl text-on-surface font-bold">Severe Fluid Pound</h4>
+<div class="w-full h-40 bg-surface border border-outline-variant flex items-center justify-center p-4">
+<svg class="w-full h-full" viewbox="0 0 400 120">
+<path d="M 60 95 L 340 95 L 340 25 L 180 25 L 60 70 Z" fill="none" stroke="#bd721d" stroke-width="2.5"></path>
+<text fill="#bd721d" font-family="JetBrains Mono" font-size="11" font-weight="700" x="80" y="55">FLUID POUND IMPACT NOTCH</text>
+</svg>
+</div>
+<p class="font-body-md text-sm md:text-base text-on-surface-variant leading-relaxed">Signature: Abrupt right-angle drop at mid-downstroke when traveling valve impacts liquid interface after incomplete pump fillage (&lt;65%).</p>
+</div>
+<!-- Fault Card 3 -->
+<div class="bg-surface-container-low p-6 md:p-8 border border-outline-variant space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-xs text-secondary font-bold">FAULT PATTERN A-03</span>
+<span class="font-label-caps text-xs text-secondary font-bold">STATUS: TARGET OPTIMAL</span>
+</div>
+<h4 class="font-headline-md text-lg md:text-xl text-on-surface font-bold">Nominal Heavy Oil Full Pump</h4>
+<div class="w-full h-40 bg-surface border border-outline-variant flex items-center justify-center p-4">
+<svg class="w-full h-full" viewbox="0 0 400 120">
+<polygon fill="none" points="60,95 340,95 340,25 60,25" stroke="#246a4c" stroke-width="2.5"></polygon>
+<text fill="#246a4c" font-family="JetBrains Mono" font-size="11" font-weight="700" x="130" y="65">FULL RECTANGULAR PUMP CARD</text>
+</svg>
+</div>
+<p class="font-body-md text-sm md:text-base text-on-surface-variant leading-relaxed">Signature: Near-rectangular ideal downhole card indicative of 100% pump fillage, nominal traveling valve seating, and balanced rod string tension.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- TAB 4: WELL AUDIT LOG -->
+<section class="hidden space-y-8" id="tab-audit">
+<div class="bg-surface-container-lowest border border-outline-variant p-6 md:p-8 space-y-6">
+<div class="flex flex-wrap justify-between items-center pb-4 border-b border-outline-variant gap-3">
+<div>
+<span class="font-label-caps text-xs text-on-surface-variant uppercase tracking-wider">OIL REGULATORY COMPLIANCE</span>
+<h3 class="font-headline-lg text-xl md:text-2xl text-on-surface font-bold">Field Audit &amp; Setpoint Modulation History</h3>
+</div>
+<button class="px-4 py-2 bg-primary text-on-primary font-telemetry-sm text-sm hover:bg-inverse-surface font-semibold" onclick="triggerAuditExport()">
+              DOWNLOAD SIGNED CERTIFICATE (PDF)
+            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-telemetry-sm text-sm">
+<thead class="bg-surface-container border-b border-outline-variant text-on-surface-variant font-label-caps text-xs">
+<tr>
+<th class="p-4">TIMESTAMP (IST)</th>
+<th class="p-4">WELL</th>
+<th class="p-4">PRE-INTERVENTION SPM</th>
+<th class="p-4">POST-INTERVENTION SPM</th>
+<th class="p-4">TRIGGER REASON</th>
+<th class="p-4">OPERATOR ID</th>
+<th class="p-4">STATUS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant" id="audit-table-body">
+<tr class="hover:bg-surface-container-low">
+<td class="p-4">2025-02-23 09:14:02</td>
+<td class="p-4 font-bold text-base">BGW-001</td>
+<td class="p-4">5.8 SPM</td>
+<td class="p-4 font-bold text-secondary text-base">4.5 SPM</td>
+<td class="p-4">Preventive Viscosity Adjustment</td>
+<td class="p-4">OIL-ENG-4912</td>
+<td class="p-4 text-secondary font-bold">EXECUTED</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-4">2025-02-23 04:30:19</td>
+<td class="p-4 font-bold text-base">BGW-004</td>
+<td class="p-4">0.0 SPM</td>
+<td class="p-4">0.0 SPM</td>
+<td class="p-4">Steam Cycle 2 Day 6 Injection Check</td>
+<td class="p-4">OIL-SYS-AUTO</td>
+<td class="p-4 text-secondary font-bold">VERIFIED</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-4">2025-02-22 18:22:45</td>
+<td class="p-4 font-bold text-base">BGW-006</td>
+<td class="p-4">6.0 SPM</td>
+<td class="p-4 font-bold text-secondary text-base">5.2 SPM</td>
+<td class="p-4">Fluid Pound Mitigation</td>
+<td class="p-4">OIL-ENG-3108</td>
+<td class="p-4 text-secondary font-bold">EXECUTED</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- SCADA INTERACTION & PHYSICS LOGIC JAVASCRIPT -->
+<script>
+    // Toggle expandable 'How it works' physics drawer
+    const toggleDrawerBtn = document.getElementById('toggle-drawer-btn');
+    const physicsDrawer = document.getElementById('physics-drawer');
+    const drawerArrow = document.getElementById('drawer-arrow');
+
+    toggleDrawerBtn.addEventListener('click', () => {
+      const isHidden = physicsDrawer.classList.contains('hidden');
+      if (isHidden) {
+        physicsDrawer.classList.remove('hidden');
+        drawerArrow.textContent = 'expand_less';
+      } else {
+        physicsDrawer.classList.add('hidden');
+        drawerArrow.textContent = 'expand_more';
+      }
+    });
+
+    // Tab Switching Logic
+    function switchTab(tabId) {
+      const tabs = ['tab-twin', 'tab-css', 'tab-incident', 'tab-audit'];
+      const btnMap = {
+        'tab-twin': 'btn-tab-twin',
+        'tab-css': 'btn-tab-css',
+        'tab-incident': 'btn-tab-incident',
+        'tab-audit': 'btn-tab-audit'
+      };
+
+      tabs.forEach(t => {
+        const el = document.getElementById(t);
+        const btn = document.getElementById(btnMap[t]);
+        if (t === tabId) {
+          el.classList.remove('hidden');
+          btn.className = "px-4 py-3 font-telemetry-sm text-xs md:text-sm font-semibold border-b-2 border-primary text-on-surface flex items-center gap-2 transition-colors";
+        } else {
+          el.classList.add('hidden');
+          btn.className = "px-4 py-3 font-telemetry-sm text-xs md:text-sm text-on-surface-variant hover:text-on-surface border-b-2 border-transparent flex items-center gap-2 transition-colors";
+        }
+      });
+    }
+
+    // Well Selector Action
+    function selectWell(wellId) {
+      document.getElementById('active-well-badge').innerHTML = `Active: <strong class="text-secondary-fixed font-semibold text-sm">${wellId}</strong>`;
+      document.getElementById('telemetry-well-id').innerText = wellId;
+
+      // Update card visual active styling
+      const allCards = ['BGW-001', 'BGW-002', 'BGW-003', 'BGW-004', 'BGW-005', 'BGW-006'];
+      allCards.forEach(id => {
+        const c = document.getElementById(`card-${id}`);
+        if (c) {
+          if (id === wellId) {
+            c.classList.add('bg-surface-container-lowest', 'shadow-sm');
+            c.classList.remove('bg-surface-container-low');
+          } else {
+            c.classList.remove('bg-surface-container-lowest', 'shadow-sm');
+            c.classList.add('bg-surface-container-low');
+          }
+        }
+      });
+    }
+
+    // Real-time Dynamic Simulation Updates
+    function updateSimulation() {
+      const spmSlider = document.getElementById('slider-spm');
+      const tempSlider = document.getElementById('slider-temp');
+      const spm = parseFloat(spmSlider.value);
+      const temp = parseFloat(tempSlider.value);
+
+      document.getElementById('val-spm').innerText = spm.toFixed(1) + ' SPM';
+      document.getElementById('val-flowline-temp').innerText = temp.toFixed(1) + ' °C';
+      document.getElementById('ribbon-flowline-temp').innerText = temp.toFixed(1) + ' °C';
+
+      // Heavy Crude Arrhenius/Walther Viscosity Approximation for Baghewala 17.4° API
+      const baseViscosity = 4820;
+      const refTemp = 68.4;
+      const calculatedViscosity = Math.round(baseViscosity * Math.exp(-0.045 * (temp - refTemp)));
+      
+      const viscEl = document.getElementById('val-dynamic-viscosity');
+      viscEl.innerText = calculatedViscosity.toLocaleString();
+
+      // Dynamic Motor Torque calculation
+      const calculatedTorque = Math.min(99.0, Math.max(35.0, (spm * 9.8) + (calculatedViscosity / 250)));
+      document.getElementById('val-motor-torque').innerText = calculatedTorque.toFixed(1) + '%';
+      document.getElementById('ribbon-vfd-load').innerText = calculatedTorque.toFixed(1) + '%';
+      document.getElementById('bar-motor-torque').style.width = calculatedTorque.toFixed(1) + '%';
+
+      // Check float risk status based on SPM and Viscosity
+      const floatRiskCritical = (spm > 4.2 && calculatedViscosity > 3800);
+      const pill = document.getElementById('dynacard-status-pill');
+      const bulb = document.getElementById('status-bulb');
+      const statusText = document.getElementById('status-engine-text');
+      const distortionArea = document.getElementById('float-distortion-area');
+      const distortionText = document.getElementById('float-distortion-text');
+      const pumpCard = document.getElementById('downhole-pump-card');
+
+      if (floatRiskCritical) {
+        pill.className = "px-3 py-1 bg-error-container text-on-error-container font-label-caps text-xs md:text-sm font-bold border border-error";
+        pill.innerText = "SEVERE DOWNSTROKE BUOYANT DRAG (84% FLOAT RISK)";
+        bulb.className = "w-3 h-3 rounded-full bg-error";
+        statusText.className = "font-label-caps text-xs md:text-sm font-bold text-error tracking-wider";
+        statusText.innerText = "INTERVENTION REQUIRED: ROD COMPRESSION RISK";
+        distortionArea.setAttribute('opacity', '0.75');
+        distortionText.setAttribute('opacity', '1.0');
+        pumpCard.setAttribute('points', '140,165 600,160 600,85 160,85 140,165');
+      } else {
+        pill.className = "px-3 py-1 bg-secondary-container text-on-secondary-container font-label-caps text-xs md:text-sm font-bold border border-secondary";
+        pill.innerText = "NOMINAL FULL STROKE TENSION (ZERO FLOAT)";
+        bulb.className = "w-3 h-3 rounded-full bg-secondary";
+        statusText.className = "font-label-caps text-xs md:text-sm font-bold text-secondary tracking-wider";
+        statusText.innerText = "EQUILIBRIUM ACHIEVED: POSITIVE STRING TENSION";
+        distortionArea.setAttribute('opacity', '0');
+        distortionText.setAttribute('opacity', '0');
+        pumpCard.setAttribute('points', '100,200 620,200 620,70 100,70');
+      }
+    }
+
+    // 1-Click AI Rectification Action
+    function applyAiRectification() {
+      const spmSlider = document.getElementById('slider-spm');
+      spmSlider.value = 3.8;
+      updateSimulation();
+
+      // Update diagnostic panels to reflect optimized state
+      document.getElementById('diagnostic-col1').innerHTML = 
+        '<strong class="text-secondary font-bold">POSITIVE TENSION RESTORED:</strong> Downstroke buoyant load reduced to nominal. Net traveling valve clearance latency reduced from 42% to 0%. Buckling risk eliminated.';
+      
+      document.getElementById('diagnostic-col2').innerHTML = 
+        '<strong class="text-secondary font-bold">VFD ADAPTIVE MODULATION:</strong> Pumping speed decelerated to 3.8 SPM, allowing 120-inch downstroke velocity to match viscous crude shear rate.';
+
+      document.getElementById('diagnostic-col3').innerHTML = 
+        '<div class="flex items-start gap-3"><span class="w-6 h-6 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</span><p><strong class="text-secondary font-bold">Active SPM Telemetry:</strong> Modulated to 3.8 SPM.</p></div><div class="flex items-start gap-3"><span class="w-6 h-6 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</span><p><strong class="text-on-surface font-bold">Wellhead Heating:</strong> Energized to 14 kW.</p></div><div class="flex items-start gap-3"><span class="w-6 h-6 rounded bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</span><p><strong class="text-on-surface font-bold">CSS Cycle 5:</strong> Queued for 03-March-2025.</p></div>';
+
+      // Add record to Audit Log
+      const auditTable = document.getElementById('audit-table-body');
+      const now = new Date();
+      const timeString = now.toISOString().replace('T', ' ').substring(0, 19);
+      const newRow = `
+        <tr class="bg-secondary-container/20">
+          <td class="p-4 font-bold">${timeString}</td>
+          <td class="p-4 font-bold text-secondary text-base">BGW-002</td>
+          <td class="p-4">6.2 SPM</td>
+          <td class="p-4 font-bold text-secondary text-base">3.8 SPM</td>
+          <td class="p-4 font-medium">1-Click AI Rod Float Mitigation</td>
+          <td class="p-4">OIL-RAJ-AUTO-AGENT</td>
+          <td class="p-4 text-secondary font-bold">APPLIED // STABLE</td>
+        </tr>
+      `;
+      auditTable.insertAdjacentHTML('afterbegin', newRow);
+
+      const btn = document.getElementById('apply-ai-btn');
+      btn.classList.add('bg-secondary', 'border-secondary');
+      btn.innerHTML = '<span class="material-symbols-outlined text-xl">done_all</span><span>SETPOINTS ACTIVE: 3.8 SPM (NOMINAL)</span>';
+      
+      setTimeout(() => {
+        btn.classList.remove('bg-secondary', 'border-secondary');
+        btn.innerHTML = '<span class="material-symbols-outlined text-secondary-fixed text-xl">electric_bolt</span><span>RE-RUN AI RECTIFICATION OPTIMIZER</span>';
+      }, 4000);
+    }
+
+    function manualOverrideAlert() {
+      alert("SCADA MANUAL OVERRIDE ENGAGED.\n\nOperator OIL Duliajan/Rajasthan has assumed direct motor controller bus interlock. Autonomous safety limits remain active in background.");
+    }
+
+    function triggerAuditExport() {
+      alert("GENERATING SIGNED SCADA LOG ARCHIVE (OIL INDIA LIMITED // BAGHEWALA BGW-002)\nFormat: Encrypted SHA-256 PDF/CSV.\nCompliant with DGMS & Petroleum Concession Rules.");
+    }
+
+    // Keep live seconds clock ticking
+    setInterval(() => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const tsEl = document.getElementById('live-timestamp');
+      if (tsEl) {
+        tsEl.innerText = `${hours}:${minutes}:${seconds} IST`;
+      }
+    }, 1000);
+  </script>
+</body></html>

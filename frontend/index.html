@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THERMOLIFT X — Digital Twin | OIL INDIA LIMITED</title>
+  <meta name="description" content="Closed-Loop Heavy-Oil Thermal-to-Lift Digital Twin for Baghewala Field CSS & SRP Operations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+  <!-- Top Header Instrument Bar -->
+  <header class="top-header">
+    <div class="brand-section">
+      <div class="logo-badge">OIL INDIA LIMITED</div>
+      <div class="title-group">
+        <h1>THERMOLIFT X <span style="font-size: 0.72rem; color: var(--steel-blue); font-family: var(--font-telemetry); font-weight: 500;">// DIGITAL TWIN</span></h1>
+        <p>Baghewala Heavy Oil (17–19° API) &bull; Cyber-Physical Decision Twin</p>
+      </div>
+    </div>
+
+    <!-- Center Active Well Selector -->
+    <div class="header-well-picker">
+      <label for="wellSelect">TARGET ASSET:</label>
+      <select id="wellSelect" class="well-select-header">
+        <option value="BGW-002" selected>BGW-002 [CRITICAL: VISCOUS FLOATING]</option>
+        <option value="BGW-017">BGW-017 [DEMO BENCHMARK RIG]</option>
+        <option value="BGW-001">BGW-001 [HEALTHY PRODUCER]</option>
+        <option value="BGW-003">BGW-003 [WARNING: THERMAL COOLING]</option>
+        <option value="BGW-004">BGW-004 [HEALTHY PRODUCER]</option>
+        <option value="BGW-005">BGW-005 [WARNING: HIGH ROD STRESS]</option>
+        <option value="BGW-006">BGW-006 [HEALTHY PRODUCER]</option>
+        <option value="BGW-007">BGW-007 [COOLING TRANSITION]</option>
+        <option value="BGW-008">BGW-008 [HEALTHY PRODUCER]</option>
+        <option value="BGW-009">BGW-009 [HEALTHY PRODUCER]</option>
+        <option value="BGW-010">BGW-010 [HEALTHY PRODUCER]</option>
+        <option value="BGW-011">BGW-011 [HEALTHY PRODUCER]</option>
+        <option value="BGW-012">BGW-012 [HEALTHY PRODUCER]</option>
+        <option value="BGW-013">BGW-013 [HEALTHY PRODUCER]</option>
+        <option value="BGW-014">BGW-014 [HEALTHY PRODUCER]</option>
+        <option value="BGW-015">BGW-015 [HEALTHY PRODUCER]</option>
+      </select>
+    </div>
+
+    <div class="header-badges">
+      <div class="badge-item badge-prototype">
+        <span class="badge-status-dot warn"></span> SIMULATION MODE
+      </div>
+      <div class="badge-item badge-twin-health" id="headerTwinHealthBadge">
+        <span class="badge-status-dot live"></span> TWIN HEALTH: 92.8%
+      </div>
+      <!-- Toggle button for slide-out side drawer that holds all lists and tables -->
+      <button id="btnToggleDrawer" class="btn-drawer-toggle">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        DATA TABLES & SCHEDULES (16)
+      </button>
+      <button id="btnOpenJuryMode" class="btn-case-walkthrough">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        SCADA INCIDENT REPLAY (13 PHASES)
+      </button>
+    </div>
+  </header>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+    <!-- Clean Minimal Sidebar Navigation -->
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Twin Workflows</div>
+      <div class="nav-item active" data-target="view-command-center">
+        <span class="nav-icon"><svg class="nav-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+        Digital Twin Stage
+      </div>
+      <div class="nav-item" data-target="view-future-rehearsal">
+        <span class="nav-icon"><svg class="nav-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v10a2 2 0 0 0 2 2h10"/><path d="M6 9a9 9 0 0 1 9-9h3"/></svg></span>
+        6-Branch Rehearsal
+      </div>
+      <div class="nav-item" data-target="view-joint-optimizer">
+        <span class="nav-icon"><svg class="nav-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+        Pareto Lift Optimizer
+      </div>
+      <div class="nav-item" data-target="view-methodology">
+        <span class="nav-icon"><svg class="nav-svg" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+        Physics & Formulations
+      </div>
+
+      <div style="margin-top: auto; padding: 12px 6px;">
+        <button id="btnOpenDrawerSidebar" class="btn-drawer-toggle" style="width: 100%; justify-content: center;">
+          <svg class="btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          OPEN DATA DRAWER
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Viewport -->
+    <main class="main-view-container">
+
+      <!-- ================================================================= -->
+      <!-- VIEW 1 (PRIMARY HERO): DIGITAL TWIN COMMAND STAGE -->
+      <!-- ================================================================= -->
+      <section id="view-command-center" class="view-pane active">
+        <div class="digital-twin-stage">
+          
+          <!-- TELEMETRY HUD CHIPS STRIP -->
+          <div class="twin-hud-strip">
+            <div class="twin-hud-chip">
+              <div class="twin-hud-label">Reservoir Temp</div>
+              <div class="twin-hud-val" id="wiTemp">68.7 °C</div>
+              <div class="twin-hud-sub">Marx-Langenheim</div>
+            </div>
+            <div class="twin-hud-chip">
+              <div class="twin-hud-label">Crude Viscosity</div>
+              <div class="twin-hud-val" id="wiVisc">2,239 cP</div>
+              <div class="twin-hud-sub">Andrade-Walther</div>
+            </div>
+            <div class="twin-hud-chip">
+              <div class="twin-hud-label">Lift Production</div>
+              <div class="twin-hud-val" id="wiOil">8.8 bopd</div>
+              <div class="twin-hud-sub" id="wiWatercut">Watercut: 37%</div>
+            </div>
+            <div class="twin-hud-chip">
+              <div class="twin-hud-label">Pump Speed</div>
+              <div class="twin-hud-val" id="wiSpm">6.9 SPM</div>
+              <div class="twin-hud-sub" id="wiVfd">VFD: 43.2 Hz</div>
+            </div>
+            <div class="twin-hud-chip">
+              <div class="twin-hud-label">Rod Fall Margin</div>
+              <div class="twin-hud-val" id="wiMargin" style="color: var(--led-green);">+52.0%</div>
+              <div class="twin-hud-sub" id="wiMarginStatus">Safe Positive Sink</div>
+            </div>
+            <div class="twin-hud-chip">
+              <div class="twin-hud-label">7-Day Failure Risk</div>
+              <div class="twin-hud-val" id="wiFailRisk" style="color: var(--steel-blue);">0.01</div>
+              <div class="twin-hud-sub" id="wiRul">Horizon: 78.0 days</div>
+            </div>
+          </div>
+
+          <!-- DUAL DIGITAL TWIN CANVASES (HERO STAGE) -->
+          <div class="twin-split-canvas">
+            
+            <!-- LEFT: RIG & WELLBORE SIMULATOR CANVAS -->
+            <div class="twin-canvas-panel">
+              <div class="twin-canvas-header">
+                <div class="twin-canvas-title">
+                  <svg class="btn-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 22 22 22 12 2"/></svg>
+                  SUCKER ROD PUMP & ANNULAR WELLBORE (862m)
+                </div>
+                <span id="rigStatusBadge" class="badge-item badge-prototype">MONITORING</span>
+              </div>
+              <div class="twin-canvas-container">
+                <canvas id="rigCanvas"></canvas>
+              </div>
+              <div class="twin-canvas-zones">
+                <span>[ZONE 1: SURFACE PUMPJACK]</span>
+                <span>[ZONE 2: WELLBORE ANNULUS]</span>
+                <span>[ZONE 3: DOWNHOLE PUMP]</span>
+                <span>[ZONE 4: THERMAL RESERVOIR]</span>
+              </div>
+              <div class="twin-kinematic-metrics">
+                <span>Terminal Fall Vel: <strong id="dtTermVel">0.42 m/s</strong></span>
+                <span>Peak PR Vel: <strong id="dtPeakPrVel">0.38 m/s</strong></span>
+                <span>Fall Margin: <strong id="dtFloatingMargin">+52.0%</strong></span>
+                <span>Condition: <strong id="dtFloatingCondition" style="color: var(--led-green);">SAFE</strong></span>
+                <span>Impact Load: <strong id="dtImpactForce">0.0 klb</strong></span>
+              </div>
+            </div>
+
+            <!-- RIGHT: DYNAMOMETER OSCILLOSCOPE CANVAS -->
+            <div class="twin-canvas-panel">
+              <div class="twin-canvas-header">
+                <div class="twin-canvas-title">
+                  <svg class="btn-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+                  SURFACE & GIBBS DOWNHOLE DYNO CARDS
+                </div>
+                <span id="dynoDiagnosisLabel" class="badge-item badge-wells">NORMAL</span>
+              </div>
+              <div class="twin-canvas-container">
+                <canvas id="dynoCanvas"></canvas>
+              </div>
+              <div class="dyno-legend-strip">
+                <span style="color: #f8fafc;">&bull; Surface Card (PRL)</span>
+                <span style="color: var(--led-green);">&bull; Downhole Pump Card</span>
+                <span style="color: var(--led-red);">&bull; Yield Limit (22.5 klb)</span>
+              </div>
+              <div class="twin-kinematic-metrics">
+                <span>PPRL: <strong id="dynoPprlVal">16.4 klb</strong></span>
+                <span>MPRL: <strong id="dynoMprlVal">6.1 klb</strong></span>
+                <span>Pump Fillage: <strong id="dynoAreaVal">86.2%</strong></span>
+                <span>Fluid Load: <strong id="dynoDeltaVal">10.3 klb</strong></span>
+                <span>Confidence: <strong id="dynoDiagConfidence">96.4%</strong></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SUPERVISORY ACTION & CONTROL DECK -->
+          <div class="twin-deck-bar">
+            <div style="flex: 1; display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--text-main);">
+              <span class="status-indicator live"></span>
+              <div>
+                <strong id="wellIntellTitle" style="color: var(--chrome-highlight); font-family: var(--font-telemetry); font-size: 0.82rem;">BGW-002 STATUS:</strong>
+                <span id="wiExplanationText">Thermal cooling decay active. Stokes drag within manageable margins.</span>
+                <span id="wiActionText" style="color: var(--steel-blue); font-weight: 600; margin-left: 6px;">[Action: Hold 6.9 SPM]</span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <button id="btnSimulateIntervention" class="btn-secondary" style="padding: 6px 14px; font-size: 0.74rem;">
+                INSPECT INTERVENTION &rarr;
+              </button>
+              <button id="btnRunTwinRehearsal" class="btn-primary" style="padding: 6px 14px; font-size: 0.74rem;">
+                <svg class="btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                RUN 30-DAY REHEARSAL
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 2: 6-BRANCH FUTURE REHEARSAL -->
+      <!-- ================================================================= -->
+      <section id="view-future-rehearsal" class="view-pane">
+        <div class="view-header">
+          <h2>6-BRANCH FUTURE REHEARSAL SIMULATOR</h2>
+          <p>Deterministic forward trajectory comparison over 7d, 14d, and 30d operational horizons.</p>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div class="badge-item badge-prototype">
+            <span class="badge-status-dot warn"></span> SIMULATED COUNTERFACTUAL — 6 SYNCHRONIZED BRANCHES
+          </div>
+          <button id="btnRunFutureRehearsal" class="btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            EXECUTE 30-DAY REHEARSAL
+          </button>
+        </div>
+        <div class="rehearsal-cards-grid" id="rehearsalCardsContainer"></div>
+        <div class="panel-card" style="border-left: 3px solid var(--led-green); margin-top: 14px;">
+          <div class="panel-title" style="color: var(--led-green);">WHY THE OPTIMIZED PATH WINS (ANALYTICAL AUDIT)</div>
+          <div id="whyOptimizedWinsText" style="font-size: 0.85rem; line-height: 1.6; color: var(--text-main);">
+            Click 'EXECUTE 30-DAY REHEARSAL' to compare the 6 parallel futures.
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 3: PARETO LIFT OPTIMIZER -->
+      <!-- ================================================================= -->
+      <section id="view-joint-optimizer" class="view-pane">
+        <div class="view-header">
+          <h2>JOINT CSS + SRP MULTI-OBJECTIVE PARETO OPTIMIZER</h2>
+          <p>Physics-governed non-linear trade-off between oil recovery, energy intensity, and rod string fatigue.</p>
+        </div>
+        <div class="panel-card" style="margin-bottom: 16px;">
+          <div style="display: flex; gap: 20px; align-items: flex-end;">
+            <div style="flex: 1;">
+              <label style="font-family: var(--font-telemetry); font-size: 0.72rem; color: var(--text-dim); display: block; margin-bottom: 4px;">OBJECTIVE PROFILE:</label>
+              <select id="optProfileSelect" class="well-select" style="width: 100%;">
+                <option value="balanced" selected>Balanced (Multi-Objective Pareto)</option>
+                <option value="production">Production First (Maximize Heavy Oil Recovery)</option>
+                <option value="energy">Energy First (Minimize kWh/bbl & SOR)</option>
+                <option value="reliability">Reliability First (Protect Rod String Fatigue)</option>
+                <option value="cost">Cost First (Minimize Net OPEX)</option>
+              </select>
+            </div>
+            <button id="btnExecuteJointOpt" class="btn-primary" style="padding: 8px 18px;">
+              <svg class="btn-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+              COMPUTE PARETO STRATEGIES
+            </button>
+          </div>
+        </div>
+        <div class="panel-card">
+          <div class="panel-title">
+            <span>EVALUATED STRATEGIES & SAFETY GOVERNOR ENVELOPE</span>
+          </div>
+          <div class="data-table-container">
+            <table class="custom-table" id="jointOptTable">
+              <thead>
+                <tr><th>ID</th><th>Strategy</th><th>Oil Rate</th><th>Lift Cost</th><th>SOR</th><th>Rod Margin</th><th>Safety Check</th><th>Dispatch</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 4: PHYSICS & METHODOLOGY -->
+      <!-- ================================================================= -->
+      <section id="view-methodology" class="view-pane">
+        <div class="view-header">
+          <h2>CYBER-PHYSICAL ARCHITECTURE & FORMULATIONS</h2>
+          <p>Technical reference for petroleum engineers detailing the first-principles foundations of THERMOLIFT X.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="panel-card">
+            <div class="panel-title"><span>THERMAL & HYDRAULIC EQUATIONS</span></div>
+            <div style="font-size: 0.82rem; line-height: 1.6; color: var(--text-main);">
+              <p><strong>Reservoir Heat (Marx-Langenheim):</strong> Heated zone radius accounts for conductive overburden and underburden losses.</p>
+              <p style="margin-top: 8px;"><strong>Crude Viscosity (Beggs-Robinson):</strong> Temperature-dependent Andrade model calibrated against Baghewala dead oil PVT.</p>
+            </div>
+          </div>
+          <div class="panel-card">
+            <div class="panel-title"><span>ARTIFICIAL LIFT KINEMATICS</span></div>
+            <div style="font-size: 0.82rem; line-height: 1.6; color: var(--text-main);">
+              <p><strong>Stokes-Navier Annular Drag:</strong> Frictional resistance on rod string in cooling heavy crude dictates maximum safe SPM.</p>
+              <p style="margin-top: 8px;"><strong>Gibbs Wave Equation:</strong> Downhole pump card reconstructed from polished rod dynamometer load-displacement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE-OUT DATA DRAWER (ALL LISTS & TABLES HIDDEN HERE) -->
+  <!-- ===================================================================== -->
+  <div id="dataDrawerBackdrop" class="drawer-backdrop"></div>
+  <aside id="dataDrawer" class="side-data-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        DATA TABLES & FIELD SCHEDULES
+      </div>
+      <button id="btnCloseDrawer" class="btn-drawer-close">&times;</button>
+    </div>
+
+    <!-- Drawer Tabs -->
+    <div class="drawer-tabs">
+      <button class="drawer-tab active" data-drawer-tab="tab-fleet">Fleet Wells (16)</button>
+      <button class="drawer-tab" data-drawer-tab="tab-steam">Steam Schedule</button>
+      <button class="drawer-tab" data-drawer-tab="tab-hazards">Hazards & Risks</button>
+      <button class="drawer-tab" data-drawer-tab="tab-calibration">Model Calibration</button>
+      <button class="drawer-tab" data-drawer-tab="tab-models">AI Model Cards</button>
+    </div>
+
+    <div class="drawer-content">
+      
+      <!-- TAB 1: FLEET WELL ROSTER -->
+      <div id="tab-fleet" class="drawer-pane active">
+        <div class="drawer-pane-header">
+          <h4>Baghewala Asset Roster (15 Field Wells + BGW-017 DEMO)</h4>
+          <p>Click any well card to switch the live digital twin kinematics.</p>
+        </div>
+        <div class="fleet-grid" id="fleetGridContainer"></div>
+      </div>
+
+      <!-- TAB 2: STEAM ALLOCATION SCHEDULE -->
+      <div id="tab-steam" class="drawer-pane">
+        <div class="drawer-pane-header">
+          <h4>Field Steam Allocation (Knapsack MVS Optimization)</h4>
+          <p>Boiler generation distributed across candidate wells by Marginal Value of Steam.</p>
+        </div>
+        <div class="steam-control-strip">
+          <label style="font-family: var(--font-telemetry); font-size: 0.72rem; color: var(--text-dim); display: block;">AVAILABLE BOILER STEAM (CWE):</label>
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
+            <input type="range" id="rngAvailableSteam" min="3000" max="15000" step="500" value="8500" style="flex: 1;">
+            <span id="lblAvailableSteamVal" style="font-family: var(--font-telemetry); font-weight: 700; color: var(--steel-blue); font-size: 1rem;">8,500 m³</span>
+          </div>
+          <button id="btnAllocateSteam" class="btn-primary" style="margin-top: 10px; width: 100%;">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            COMPUTE KNAPSACK MVS ALLOCATION
+          </button>
+        </div>
+        <div id="lblAllocationSummary" class="drawer-sub-badge">Allocated across candidate wells</div>
+        <div class="data-table-container" style="max-height: 520px; overflow-y: auto;">
+          <table class="custom-table" id="steamAllocTable">
+            <thead>
+              <tr><th>Rank</th><th>Well</th><th>Thermal State</th><th>Current</th><th>Incr.</th><th>Steam Req</th><th>SOR</th><th>MVS</th><th>Status</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: HAZARDS & RISKS -->
+      <div id="tab-hazards" class="drawer-pane">
+        <div class="drawer-pane-header">
+          <h4>Top Operational Hazards & Thermal Opportunities</h4>
+        </div>
+        <div style="margin-bottom: 16px;">
+          <div class="panel-title" style="color: var(--led-red); font-size: 0.8rem;"><span class="status-indicator alert"></span> TOP OPERATIONAL HAZARDS</div>
+          <div id="topRisksContainer"></div>
+        </div>
+        <div style="margin-bottom: 16px;">
+          <div class="panel-title" style="color: var(--led-green); font-size: 0.8rem;"><span class="status-indicator healthy"></span> HIGH-MARGIN STEAM CANDIDATES</div>
+          <div id="topOpportunitiesContainer"></div>
+        </div>
+        <div>
+          <div class="panel-title" style="font-size: 0.8rem;">KEY RISK DRIVERS FOR ACTIVE WELL:</div>
+          <div id="rrDriverText" style="background: rgba(0,0,0,0.3); padding: 10px; font-size: 0.8rem; line-height: 1.5; border-radius: var(--radius-sm); color: var(--text-main);">Analyzing risk contributors...</div>
+        </div>
+      </div>
+
+      <!-- TAB 4: CALIBRATION & RESIDUALS -->
+      <div id="tab-calibration" class="drawer-pane">
+        <div class="drawer-pane-header">
+          <h4>Closed-Loop Parameter Telemetry Residuals</h4>
+          <p>Continuous model drift tracking and Bayesian prior recalibration.</p>
+        </div>
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <div class="kpi-card" style="flex: 1; padding: 8px;">
+            <div class="kpi-label">Twin Health</div>
+            <div class="kpi-value" id="paTwinHealth" style="font-size: 1.1rem; color: var(--led-green);">92.8%</div>
+          </div>
+          <div class="kpi-card" style="flex: 1; padding: 8px;">
+            <div class="kpi-label">Mean Abs Error</div>
+            <div class="kpi-value" id="paMeanError" style="font-size: 1.1rem;">3.2%</div>
+          </div>
+          <div class="kpi-card" style="flex: 1; padding: 8px;">
+            <div class="kpi-label">Last Calibration</div>
+            <div class="kpi-value" id="paLastRecal" style="font-size: 0.85rem;">Just now</div>
+          </div>
+        </div>
+        <button id="btnRecalibrateTwin" class="btn-primary" style="width: 100%; margin-bottom: 12px;">
+          <svg class="btn-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          RECALIBRATE BAYESIAN RESIDUAL WEIGHTS
+        </button>
+        <div class="data-table-container" style="max-height: 440px; overflow-y: auto;">
+          <table class="custom-table" id="predActualTable">
+            <thead>
+              <tr><th>Parameter</th><th>Unit</th><th>Twin</th><th>Actual</th><th>Abs Err</th><th>Error %</th><th>Status</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 5: AI MODEL REGISTRY -->
+      <div id="tab-models" class="drawer-pane">
+        <div class="drawer-pane-header">
+          <h4>Cyber-Physical AI Model Registry</h4>
+          <p>Model cards, training datasets, physics boundaries, and confidence metrics.</p>
+        </div>
+        <div id="modelHealthCardsContainer"></div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ===================================================================== -->
+  <!-- SCADA FIELD INCIDENT REPLAY MODAL -->
+  <!-- ===================================================================== -->
+  <div id="juryModalBackdrop" class="jury-modal-backdrop">
+    <div class="jury-modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+        <div class="jury-step-badge" id="juryStepBadge">PHASE 1 OF 13 &bull; SCADA AUDIT TRAIL</div>
+        <button id="btnCloseJuryModal" style="background: none; border: none; color: var(--text-dim); font-size: 1.3rem; line-height: 1; cursor: pointer; padding: 2px 6px;">&times;</button>
+      </div>
+      <h3 class="jury-step-title" id="juryStepTitle">Field Production Baseline & Thermal Regimes</h3>
+      <div class="jury-question-box" id="juryQuestionBox">OPERATIONAL DIAGNOSTIC FOCUS: Thermal-hydraulic coupling in Baghewala heavy crude</div>
+      <div class="jury-narrative-box" id="juryNarrativeBox">
+        <div class="log-label">
+          <svg class="btn-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          SCADA FIELD TELEMETRY & SUPERVISORY RATIONALE
+        </div>
+        <div class="log-body" id="juryNarrativeBody">Loading operational telemetry...</div>
+      </div>
+      <div class="jury-key-points" id="juryKeyPointsContainer"></div>
+      <div class="jury-controls">
+        <button id="btnJuryPrev" class="btn-secondary">&larr; PREVIOUS PHASE</button>
+        <div class="progress-dots" id="juryProgressDots"></div>
+        <button id="btnJuryNext" class="btn-primary">ADVANCE PHASE &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/js/rig_renderer.js"></script>
+  <script src="static/js/dyno_renderer.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>
